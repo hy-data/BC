@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd" useGeneratedKeys="true" keyProperty="id">
+		insert into bc_goods(
+			SID,	
+			NAME,	
+			TYPE,	
+			CODE,	
+			KEYSWORK,	
+			TITLE,	
+			PICTUREURL,	
+			PRICE,	
+			STARTTIME,	
+			ISPUB,	
+			TOTALNUM,	
+			TOTALWARN,	
+			BRAND,	
+			PROMOTIONPRICE,	
+			PROMOTIONTIME,	
+			LIMITNUM,	
+			MARKETPRICE,	
+			FEEDBACKPRICE,	
+			ISSHOW,	
+			LABELID,	
+			WEIGHT,	
+			ISSALE,	
+			EXPRESSPRICE,	
+			ISEXPRESS,	
+			CREATEDATE,	
+			CREATEBY,	
+			LASTUPDATE,	
+			LASTUPDATEBY,	
+			ID
+		) values (
+			#{SID},	
+			#{NAME},	
+			#{TYPE},	
+			#{CODE},	
+			#{KEYSWORK},	
+			#{TITLE},	
+			#{PICTUREURL},	
+			#{PRICE},	
+			#{STARTTIME},	
+			#{ISPUB},	
+			#{TOTALNUM},	
+			#{TOTALWARN},	
+			#{BRAND},	
+			#{PROMOTIONPRICE},	
+			#{PROMOTIONTIME},	
+			#{LIMITNUM},	
+			#{MARKETPRICE},	
+			#{FEEDBACKPRICE},	
+			#{ISSHOW},	
+			#{LABELID},	
+			#{WEIGHT},	
+			#{ISSALE},	
+			#{EXPRESSPRICE},	
+			#{ISEXPRESS},	
+			#{CREATEDATE},	
+			#{CREATEBY},	
+			#{LASTUPDATE},	
+			#{LASTUPDATEBY},	
+			#{ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from bc_goods
+		where 
+			ID = #{ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  bc_goods
+			set 
+				SID = #{SID},
+				NAME = #{NAME},
+				TYPE = #{TYPE},
+				CODE = #{CODE},
+				KEYSWORK = #{KEYSWORK},
+				TITLE = #{TITLE},
+				PICTUREURL = #{PICTUREURL},
+				PRICE = #{PRICE},
+				STARTTIME = #{STARTTIME},
+				ISPUB = #{ISPUB},
+				TOTALNUM = #{TOTALNUM},
+				TOTALWARN = #{TOTALWARN},
+				BRAND = #{BRAND},
+				PROMOTIONPRICE = #{PROMOTIONPRICE},
+				PROMOTIONTIME = #{PROMOTIONTIME},
+				LIMITNUM = #{LIMITNUM},
+				MARKETPRICE = #{MARKETPRICE},
+				FEEDBACKPRICE = #{FEEDBACKPRICE},
+				ISSHOW = #{ISSHOW},
+				LABELID = #{LABELID},
+				WEIGHT = #{WEIGHT},
+				ISSALE = #{ISSALE},
+				EXPRESSPRICE = #{EXPRESSPRICE},
+				ISEXPRESS = #{ISEXPRESS},
+				CREATEDATE = #{CREATEDATE},
+				CREATEBY = #{CREATEBY},
+				LASTUPDATE = #{LASTUPDATE},
+				LASTUPDATEBY = #{LASTUPDATEBY},
+			ID = ID
+			where 
+				ID = #{ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			SID,	
+			NAME,	
+			TYPE,	
+			CODE,	
+			KEYSWORK,	
+			TITLE,	
+			PICTUREURL,	
+			PRICE,	
+			STARTTIME,	
+			ISPUB,	
+			TOTALNUM,	
+			TOTALWARN,	
+			BRAND,	
+			PROMOTIONPRICE,	
+			PROMOTIONTIME,	
+			LIMITNUM,	
+			MARKETPRICE,	
+			FEEDBACKPRICE,	
+			ISSHOW,	
+			LABELID,	
+			WEIGHT,	
+			ISSALE,	
+			EXPRESSPRICE,	
+			ISEXPRESS,	
+			CREATEDATE,	
+			CREATEBY,	
+			LASTUPDATE,	
+			LASTUPDATEBY,	
+			ID
+		from 
+			bc_goods
+		where 
+			ID = #{ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.SID,	
+				a.NAME,	
+				a.TYPE,	
+				a.CODE,	
+				a.KEYSWORK,	
+				a.TITLE,	
+				a.PICTUREURL,	
+				a.PRICE,	
+				a.STARTTIME,	
+				a.ISPUB,	
+				a.TOTALNUM,	
+				a.TOTALWARN,	
+				a.BRAND,	
+				a.PROMOTIONPRICE,	
+				a.PROMOTIONTIME,	
+				a.LIMITNUM,	
+				a.MARKETPRICE,	
+				a.FEEDBACKPRICE,	
+				a.ISSHOW,	
+				a.LABELID,	
+				a.WEIGHT,	
+				a.ISSALE,	
+				a.EXPRESSPRICE,	
+				a.ISEXPRESS,	
+				a.CREATEDATE,	
+				a.CREATEBY,	
+				a.LASTUPDATE,	
+				a.LASTUPDATEBY,	
+				a.ID
+		from 
+				bc_goods a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.SID,	
+				a.NAME,	
+				a.TYPE,	
+				a.CODE,	
+				a.KEYSWORK,	
+				a.TITLE,	
+				a.PICTUREURL,	
+				a.PRICE,	
+				a.STARTTIME,	
+				a.ISPUB,	
+				a.TOTALNUM,	
+				a.TOTALWARN,	
+				a.BRAND,	
+				a.PROMOTIONPRICE,	
+				a.PROMOTIONTIME,	
+				a.LIMITNUM,	
+				a.MARKETPRICE,	
+				a.FEEDBACKPRICE,	
+				a.ISSHOW,	
+				a.LABELID,	
+				a.WEIGHT,	
+				a.ISSALE,	
+				a.EXPRESSPRICE,	
+				a.ISEXPRESS,	
+				a.CREATEDATE,	
+				a.CREATEBY,	
+				a.LASTUPDATE,	
+				a.LASTUPDATEBY,	
+				a.ID
+		from 
+				bc_goods a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from bc_goods
+		where 
+			ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

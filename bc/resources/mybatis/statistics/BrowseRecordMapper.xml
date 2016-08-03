@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BrowseRecordMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into browse_record(
+			DEVICE_ID,	
+			DEVICE_TYPE,	
+			OPERATING_SYSTEM,	
+			REMOTE_ADDR,	
+			ACCESS_TIME,	
+			USER_NAME,	
+			USER_ID
+		) values (
+			#{DEVICE_ID},	
+			#{DEVICE_TYPE},	
+			#{OPERATING_SYSTEM},	
+			#{REMOTE_ADDR},	
+			#{ACCESS_TIME},	
+			#{USER_NAME},	
+			#{USER_ID}
+		)
+	</insert>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			DEVICE_ID,	
+			DEVICE_TYPE,	
+			OPERATING_SYSTEM,	
+			REMOTE_ADDR,	
+			ACCESS_TIME,	
+			USER_NAME,	
+			USER_ID
+		from 
+			browse_record
+		where 
+			USER_ID = #{USER_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.DEVICE_ID,	
+				a.DEVICE_TYPE,	
+				a.OPERATING_SYSTEM,	
+				a.REMOTE_ADDR,	
+				a.ACCESS_TIME,	
+				a.USER_NAME,	
+				a.USER_ID
+		from 
+				browse_record a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.DEVICE_ID,	
+				a.DEVICE_TYPE,	
+				a.OPERATING_SYSTEM,	
+				a.REMOTE_ADDR,	
+				a.ACCESS_TIME,	
+				a.USER_NAME,	
+				a.USER_ID
+		from 
+				browse_record a
+	</select>
+	
+</mapper>

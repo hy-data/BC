@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StatisticsMapper">
+	
+	<!-- 注册用户统计-->
+	<select id="countUser" parameterType="pd" resultType="java.lang.Integer">
+		SELECT
+			count(*)
+		FROM
+			tb_member
+	</select>
+	
+	<!-- 用户购买统计-->
+	<select id="countBought" parameterType="pd" resultType="java.lang.Integer">
+		SELECT 
+			count(distinct(MEMBER_ID)) 
+		FROM 
+			member_indent 
+		WHERE 
+			INDENT_ID in (select INDENT_ID from tb_indent where INDENT_STATUS=5)
+	</select>
+	
+	<!-- 总交易金额统计-->
+	<select id="sumFee" parameterType="pd" resultType="java.lang.Double">
+		SELECT 
+			sum(INDENT_TOTAL_PRICES) 
+		FROM 
+			tb_indent 
+		WHERE 
+			INDENT_STATUS=5
+	</select>
+	
+	<!-- 按照时间统计销量（如：日、月、季度、年）-->
+	<select id="saleByTime" parameterType="pd" resultType="java.lang.Integer">
+		SELECT 
+			sum(INDENT_AMOUNT) 
+		FROM 
+			tb_indent 
+		WHERE 
+			INDENT_STATUS=5
+			<if test="BEGINTIME!=null and BEGINTIME!=''">
+		    <![CDATA[ and INDENT_ADDTIME >= BEGINTIME
+  			]]>
+		    </if>
+		    <if test="ENDTIME!=null and ENDTIME!=''">
+		    <![CDATA[ and INDENT_ADDTIME <= ENDTIME
+  			]]>
+		    </if>
+	</select>
+	
+	<!-- 按照时间展示销售详细（如：日、月、季度、年）-->
+	<select id="saleInfoDatalistPage" parameterType="page" resultType="pd">
+		SELECT 
+			a.INDENT_ID,
+			a.INDENT_NUMBER,
+			b.MEMBER_ID,
+			b.ARTIST_ID,
+			a.INDENT_AMOUNT,
+			a.INDENT_TOTAL_PRICES,
+			a.INDENT_ADDTIME
+		FROM 
+			tb_indent a,member_indent b
+		WHERE 
+			a.INDENT_STATUS=5 and a.INDENT_ID=b.INDENT_ID
+			<if test="pd.beginTime!=null and pd.beginTime!=''">
+		    <![CDATA[ and a.INDENT_ADDTIME >= BEGINTIME
+  			]]>
+		    </if>
+		    <if test="pd.endTime!=null and pd.endTime!=''">
+		    <![CDATA[ and a.INDENT_ADDTIME <= ENDTIME
+  			]]>
+		    </if>
+	</select>
+	
+	<!-- 注册统计-->
+	<select id="registInfoDatalistPage" parameterType="page" resultType="pd">
+		SELECT 
+			a.MEMBER_ID,
+			a.MEMBER_ACCOUNT,
+			a.MEMBER_NICKNAME,
+			a.MEMBER_NAME,
+			a.MEMBER_IMAGE,
+			a.MEMBER_REGISTER_TIME,
+			b.ARTIST_SORT_NAME
+		FROM 
+			tb_member a,sys_artistsort b
+		WHERE 
+			a.MEMBER_IS_DELETE=0 and a.MEMBER_APPLY_TYPE=b.ARTISTSORT_ID
+			<if test="pd.beginTime!=null and pd.beginTime!=''">
+		    <![CDATA[ and a.MEMBER_REGISTER_TIME >= BEGINTIME
+  			]]>
+		    </if>
+		    <if test="pd.endTime!=null and pd.endTime!=''">
+		    <![CDATA[ and a.MEMBER_REGISTER_TIME <= ENDTIME
+  			]]>
+		    </if>
+	</select>
+	
+	<!-- 入口访问统计-->
+	<select id="accessInfoDatalistPage" parameterType="page" resultType="pd">
+		SELECT 
+			a.DEVICE_ID,
+			a.DEVICE_TYPE,
+			a.OPERATING_SYSTEM,
+			a.REMOTE_ADDR,
+			a.ACCESS_TIME,
+			a.USER_NAME,
+			a.USER_ID
+		FROM 
+			browse_record a
+		WHERE 
+			1=1 
+			<if test="pd.beginTime!=null and pd.beginTime!=''">
+		    <![CDATA[ and a.ACCESS_TIME >= BEGINTIME
+  			]]>
+		    </if>
+		    <if test="pd.endTime!=null and pd.endTime!=''">
+		    <![CDATA[ and a.ACCESS_TIME <= ENDTIME
+  			]]>
+		    </if>
+	</select>
+	
+	<!-- 浏览量统计-->
+	<select id="pageView" parameterType="pd" resultType="java.lang.Integer">
+		SELECT 
+			count(DEVICE_ID) 
+		FROM 
+			browse_record 
+		WHERE 
+			1=1
+			<if test="beginTime!=null and beginTime!=''">
+		    <![CDATA[ and ACCESS_TIME >= BEGINTIME
+  			]]>
+		    </if>
+		    <if test="endTime!=null and endTime!=''">
+		    <![CDATA[ and ACCESS_TIME <= ENDTIME
+  			]]>
+		    </if>
+	</select>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into sys_log(
+			DEVICE_ID,	
+			OPERATING_SYSTEM,	
+			REMOTE_ADDR,	
+			USER_NAME,	
+			USER_ID,	
+			INTERFACE,
+			REMARK,
+			OPER_TIME,
+			PROC_TIME,
+			RESERVE1,
+			RESERVE2
+		) values (
+			#{DEVICE_ID},
+			#{OPERATING_SYSTEM},
+			#{REMOTE_ADDR},
+			#{USER_NAME},
+			#{USER_ID},
+			#{INTERFACE},
+			#{REMARK},
+			#{OPER_TIME},
+			#{PROC_TIME},
+			#{RESERVE1},	
+			#{RESERVE2}
+		)
+	</insert>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		SELECT
+			DEVICE_ID,	
+			OPERATING_SYSTEM,	
+			REMOTE_ADDR,	
+			USER_NAME,	
+			USER_ID,	
+			INTERFACE,
+			REMARK,
+			OPER_TIME,
+			PROC_TIME,
+			RESERVE1,
+			RESERVE2
+		FROM
+			sys_log
+	</select>
+	
+</mapper>
