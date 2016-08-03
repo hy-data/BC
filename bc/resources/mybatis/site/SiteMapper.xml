@@ -6,12 +6,10 @@
 	<!-- 新增-->
 	<insert id="save" parameterType="pd" useGeneratedKeys="true" keyProperty="id">
 		insert into bc_site(
-			ID,	
 			NAME,	
 			INTRO,	
 			DESCRIPTION,	
 		) values (
-			#{ID},	
 			#{NAME},	
 			#{INTRO},	
 			#{DESCRIPTION}
