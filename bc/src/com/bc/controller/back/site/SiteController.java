@@ -103,7 +103,7 @@ public class SiteController extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = siteService.list(page);	//列出Site列表
-			mv.setViewName("site/site/site_list");
+			mv.setViewName("back/site/site_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
@@ -123,7 +123,7 @@ public class SiteController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
-			mv.setViewName("site/site/site_edit");
+			mv.setViewName("back/site/site_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
