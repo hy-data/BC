@@ -85,9 +85,6 @@
 		<div id="zhongxin">
 		<table>
 			<tr>
-				<td><input type="number" name="ID" id="ID" value="${pd.ID}" maxlength="32" placeholder="这里输入id" title="id"/></td>
-			</tr>
-			<tr>
 				<td><input type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入名称" title="名称"/></td>
 			</tr>
 			<tr>
