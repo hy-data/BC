@@ -36,7 +36,7 @@ import com.bc.util.PageData;
  * 创建时间：2016-08-03
  */
 @Controller
-@RequestMapping(value="/site")
+@RequestMapping(value="/csite")
 public class SiteController extends BaseController {
 	
 	@Resource(name="siteService")
