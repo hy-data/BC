@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ShopMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into bc_shop(
+			SMID,	
+			NAME,	
+			INTRO,	
+			DESCRIPTION,	
+			KEYSWORD,	
+			INFO,	
+			LEVEL,	
+			ADDR,	
+			COUNTRY,	
+			PROVINCE,	
+			CITY,	
+			PHONE,	
+			EMAIL,	
+			ISCLOSED,	
+			CLOSEREASON,	
+			CLOSEDATE,	
+			ISINTEGRAL,	
+			TAGNUMBER,	
+			ORDERFAILURETIME,	
+			REPAIRTIME,	
+			CREATEDATE,	
+			CREATEBY,	
+			LASTUPDATE,	
+			LASTUPDATEBY,	
+			ID
+		) values (
+			#{SMID},	
+			#{NAME},	
+			#{INTRO},	
+			#{DESCRIPTION},	
+			#{KEYSWORD},	
+			#{INFO},	
+			#{LEVEL},	
+			#{ADDR},	
+			#{COUNTRY},	
+			#{PROVINCE},	
+			#{CITY},	
+			#{PHONE},	
+			#{EMAIL},	
+			#{ISCLOSED},	
+			#{CLOSEREASON},	
+			#{CLOSEDATE},	
+			#{ISINTEGRAL},	
+			#{TAGNUMBER},	
+			#{ORDERFAILURETIME},	
+			#{REPAIRTIME},	
+			#{CREATEDATE},	
+			#{CREATEBY},	
+			#{LASTUPDATE},	
+			#{LASTUPDATEBY},	
+			#{ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from bc_shop
+		where 
+			ID = #{ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  bc_shop
+			set 
+				NAME = #{NAME},
+				INTRO = #{INTRO},
+				DESCRIPTION = #{DESCRIPTION},
+				KEYSWORD = #{KEYSWORD},
+				INFO = #{INFO},
+				LEVEL = #{LEVEL},
+				ADDR = #{ADDR},
+				COUNTRY = #{COUNTRY},
+				PROVINCE = #{PROVINCE},
+				CITY = #{CITY},
+				PHONE = #{PHONE},
+				EMAIL = #{EMAIL},
+				ISCLOSED = #{ISCLOSED},
+				CLOSEREASON = #{CLOSEREASON},
+				CLOSEDATE = #{CLOSEDATE},
+				ISINTEGRAL = #{ISINTEGRAL},
+				TAGNUMBER = #{TAGNUMBER},
+				ORDERFAILURETIME = #{ORDERFAILURETIME},
+				REPAIRTIME = #{REPAIRTIME},
+				CREATEDATE = #{CREATEDATE},
+			ID = ID
+			where 
+				ID = #{ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			SMID,	
+			NAME,	
+			INTRO,	
+			DESCRIPTION,	
+			KEYSWORD,	
+			INFO,	
+			LEVEL,	
+			ADDR,	
+			COUNTRY,	
+			PROVINCE,	
+			CITY,	
+			PHONE,	
+			EMAIL,	
+			ISCLOSED,	
+			CLOSEREASON,	
+			CLOSEDATE,	
+			ISINTEGRAL,	
+			TAGNUMBER,	
+			ORDERFAILURETIME,	
+			REPAIRTIME,	
+			CREATEDATE,	
+			CREATEBY,	
+			LASTUPDATE,	
+			LASTUPDATEBY,	
+			ID
+		from 
+			bc_shop
+		where 
+			ID = #{ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.SMID,	
+				a.NAME,	
+				a.INTRO,	
+				a.DESCRIPTION,	
+				a.KEYSWORD,	
+				a.INFO,	
+				a.LEVEL,	
+				a.ADDR,	
+				a.COUNTRY,	
+				a.PROVINCE,	
+				a.CITY,	
+				a.PHONE,	
+				a.EMAIL,	
+				a.ISCLOSED,	
+				a.CLOSEREASON,	
+				a.CLOSEDATE,	
+				a.ISINTEGRAL,	
+				a.TAGNUMBER,	
+				a.ORDERFAILURETIME,	
+				a.REPAIRTIME,	
+				a.CREATEDATE,	
+				a.CREATEBY,	
+				a.LASTUPDATE,	
+				a.LASTUPDATEBY,	
+				a.ID
+		from 
+				bc_shop a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.SMID,	
+				a.NAME,	
+				a.INTRO,	
+				a.DESCRIPTION,	
+				a.KEYSWORD,	
+				a.INFO,	
+				a.LEVEL,	
+				a.ADDR,	
+				a.COUNTRY,	
+				a.PROVINCE,	
+				a.CITY,	
+				a.PHONE,	
+				a.EMAIL,	
+				a.ISCLOSED,	
+				a.CLOSEREASON,	
+				a.CLOSEDATE,	
+				a.ISINTEGRAL,	
+				a.TAGNUMBER,	
+				a.ORDERFAILURETIME,	
+				a.REPAIRTIME,	
+				a.CREATEDATE,	
+				a.CREATEBY,	
+				a.LASTUPDATE,	
+				a.LASTUPDATEBY,	
+				a.ID
+		from 
+				bc_shop a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from bc_shop
+		where 
+			ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>
