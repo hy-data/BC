@@ -43,9 +43,9 @@ public class SiteController extends BaseController {
 	private SiteService siteService;
 	
 	/**
-	 * 新增
-	 */   
-	@RequestMapping(value="/sa ve")
+	 * 新增  大大
+	 */ 
+	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
 		logBefore(logger, "新增Site");
 		ModelAndView mv = this.getModelAndView();
