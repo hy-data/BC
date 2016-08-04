@@ -32,7 +32,7 @@ import com.bc.util.PageData;
 
 /** 
  * 类名称：SiteController
- * 创建人：FH 
+ * 创建人：刘强
  * 创建时间：2016-08-03
  */
 @Controller
