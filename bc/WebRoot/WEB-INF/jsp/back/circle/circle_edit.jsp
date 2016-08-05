@@ -91,7 +91,7 @@
 	</head>
 <body>
 	<form action="circle/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="CIRCLE_ID" id="CIRCLE_ID" value="${pd.CIRCLE_ID}"/>
+		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>

@@ -102,7 +102,7 @@ public class CircleController extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = circleService.list(page);	//列出Circle列表
-			mv.setViewName("circle/circle/circle_list");
+			mv.setViewName("back/circle/circle_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
