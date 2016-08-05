@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SiteMapper">
 	
-	
+	<!-- 后台操作sql -->
 	<!-- 新增-->
 	<insert id="save" parameterType="pd" useGeneratedKeys="true" keyProperty="id">
 		insert into bc_site(
 			NAME,	
 			INTRO,	
-			DESCRIPTION,	
+			DESCRIPTION
 		) values (
 			#{NAME},	
 			#{INTRO},	
@@ -61,7 +61,12 @@
 				a.INTRO,	
 				a.DESCRIPTION
 		from 
-				bc_site a
+				bc_site a where 1 = 1
+				<if test="pd.content!=null and pd.content!=''">
+				 and (a.name LIKE CONCAT(CONCAT('%', #{pd.content}),'%') or
+				      a.intro LIKE CONCAT(CONCAT('%', #{pd.content}),'%') or
+				      a.description LIKE CONCAT(CONCAT('%', #{pd.content}),'%'))
+			    </if>
 	</select>
 	
 	<!-- 列表(全部) -->
@@ -84,5 +89,9 @@
                  #{item}
 		</foreach>
 	</delete>
+	
+	<!-- 页面操作sql -->
+	
+	
 	
 </mapper>

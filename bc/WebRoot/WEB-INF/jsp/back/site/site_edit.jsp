@@ -80,8 +80,8 @@
 </script>
 	</head>
 <body>
-	<form action="site/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="SITE_ID" id="SITE_ID" value="${pd.SITE_ID}"/>
+	<form action="csite/${msg }.do" name="Form" id="Form" method="post">
+		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
