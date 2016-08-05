@@ -143,7 +143,7 @@ public class SiteController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = siteService.findById(pd);	//根据ID读取
-			mv.setViewName("site/site/site_edit");
+			mv.setViewName("back/site/site_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
