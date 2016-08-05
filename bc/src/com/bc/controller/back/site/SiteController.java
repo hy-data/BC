@@ -43,7 +43,7 @@ public class SiteController extends BaseController {
 	private SiteService siteService;
 	
 	/**
-	 * 新增  大大da da 
+	 * 新增  
 	 */ 
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{

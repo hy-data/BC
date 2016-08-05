@@ -31,7 +31,7 @@ public class BaseController {
 	public PageData getPageData(){
 		return new PageData(this.getRequest());
 	}
-	
+	 
 	/**
 	 * 得到ModelAndView
 	 */

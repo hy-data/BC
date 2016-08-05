@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
  * 
  * @author:fh
  * 
- */
+ */ 
 public class Const {
 	public static final String			SESSION_SECURITY_CODE					= "sessionSecCode";
 	public static final String			SESSION_USER							= "sessionUser";

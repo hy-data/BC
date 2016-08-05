@@ -4,7 +4,7 @@
 	
 	
 	<!-- 新增-->
-	<insert id="save" parameterType="pd">
+	<insert id="save" parameterType="pd" useGeneratedKeys="true" keyProperty="id">
 		insert into TB_${objectNameUpper}(
 	<#list fieldList as var>
 			${var[0]},	

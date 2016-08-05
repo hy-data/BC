@@ -192,7 +192,7 @@ public class ${objectName}Controller extends BaseController {
 		} finally {
 			logAfter(logger);
 		}
-		return AppUtil.returnObject(pd, map);
+		return JSONUtil.returnObject(pd, map);
 	}
 	
 	/*
