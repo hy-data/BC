@@ -85,13 +85,17 @@
 		<div id="zhongxin">
 		<table>
 			<tr>
-				<td><input type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入名称" title="名称"/></td>
+				<td>名称：<input  style="width:400px;margin-top:5px;"  type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入名称" title="名称"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="INTRO" id="INTRO" value="${pd.INTRO}" maxlength="32" placeholder="这里输入简介" title="简介"/></td>
+				<td>简介：<input  style="width:400px;margin-top:5px;" type="text" name="INTRO" id="INTRO" value="${pd.INTRO}" maxlength="32" placeholder="这里输入简介" title="简介"/></td>
 			</tr>
 			<tr>
-				<td><input type="text" name="DESCRIPTION" id="DESCRIPTION" value="${pd.DESCRIPTION}" maxlength="32" placeholder="这里输入描述" title="描述"/></td>
+				<td>描述：
+					<textarea style="width:400px;height:200px;margin-top:5px;" name="DESCRIPTION" id="DESCRIPTION">
+						${pd.DESCRIPTION}
+					</textarea >
+				</td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">
