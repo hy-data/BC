@@ -36,7 +36,7 @@ import com.fh.service.${packageName}.${objectNameLower}.${objectName}Service;
 
 /** 
  * 类名称：${objectName}Controller
- * 创建人：FH 
+ * 创建人：liuqiang
  * 创建时间：${nowDate?string("yyyy-MM-dd")}
  */
 @Controller
