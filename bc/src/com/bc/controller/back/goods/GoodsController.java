@@ -29,11 +29,12 @@ import com.bc.util.Const;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
 import com.bc.util.PageData;
+import com.bc.util.Tools;
 
 /** 
  * 类名称：GoodsController
- * 创建人：FH 
- * 创建时间：2016-07-29
+ * 创建人：liuqiang
+ * 创建时间：2016-08-08
  */
 @Controller
 @RequestMapping(value="/goods")
@@ -52,6 +53,9 @@ public class GoodsController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("GOODS_ID", this.get32UUID());	//主键
+		pd.put("CREATEDATE", Tools.date2Str(new Date()));	//创建时间
+		pd.put("CREATEBY", "");	//创建人
+		pd.put("LASTUPDATEBY", "");	//最后更新
 		goodsService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -66,7 +70,7 @@ public class GoodsController extends BaseController {
 		logBefore(logger, "删除Goods");
 		PageData pd = new PageData();
 		try{
-			pd = this.getPageData(); 
+			pd = this.getPageData();
 			goodsService.delete(pd);
 			out.write("success");
 			out.close();
@@ -123,7 +127,7 @@ public class GoodsController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
-			mv.setViewName("back/goods/goods_add");
+			mv.setViewName("back/goods/goods_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -195,34 +199,34 @@ public class GoodsController extends BaseController {
 		try{
 			Map<String,Object> dataMap = new HashMap<String,Object>();
 			List<String> titles = new ArrayList<String>();
-			titles.add("sid");	//1
-			titles.add("name");	//2
-			titles.add("type");	//3
-			titles.add("code");	//4
-			titles.add("keyswork");	//5
-			titles.add("title");	//6
-			titles.add("pictureurl");	//7
-			titles.add("price");	//8
-			titles.add("starttime");	//9
-			titles.add("ispub");	//10
-			titles.add("totalnum");	//11
-			titles.add("totalwarn");	//12
-			titles.add("brand");	//13
-			titles.add("promotionprice");	//14
-			titles.add("promotiontime");	//15
-			titles.add("limitnum");	//16
-			titles.add("marketprice");	//17
-			titles.add("feedbackprice");	//18
-			titles.add("isshow");	//19
-			titles.add("labelid");	//20
-			titles.add("weight");	//21
-			titles.add("issale");	//22
-			titles.add("expressprice");	//23
-			titles.add("isexpress");	//24
-			titles.add("createdate");	//25
-			titles.add("createby");	//26
-			titles.add("lastupdate");	//27
-			titles.add("lastupdateby");	//28
+			titles.add("商店");	//1
+			titles.add("商品名称");	//2
+			titles.add("商品主类型");	//3
+			titles.add("商品货号");	//4
+			titles.add("商品关键字");	//5
+			titles.add("商品简单描述");	//6
+			titles.add("主图片地址");	//7
+			titles.add("商品原始价格");	//8
+			titles.add("开始销售时间");	//9
+			titles.add("是否发布");	//10
+			titles.add("库存总数");	//11
+			titles.add("库存警告");	//12
+			titles.add("品牌");	//13
+			titles.add("促销价格");	//14
+			titles.add("促销时间");	//15
+			titles.add("限购数量");	//16
+			titles.add("市场售价");	//17
+			titles.add("分成金额");	//18
+			titles.add("是否在店铺显示");	//19
+			titles.add("推荐标签");	//20
+			titles.add("商品重量");	//21
+			titles.add("是否允许做为普通商品销售，否则只能赠送及配件");	//22
+			titles.add("快递费");	//23
+			titles.add("是否免费邮寄");	//24
+			titles.add("创建时间");	//25
+			titles.add("创建人");	//26
+			titles.add("更新时间");	//27
+			titles.add("最后更新");	//28
 			dataMap.put("titles", titles);
 			List<PageData> varOList = goodsService.listAll(pd);
 			List<PageData> varList = new ArrayList<PageData>();
@@ -239,14 +243,14 @@ public class GoodsController extends BaseController {
 				vpd.put("var9", varOList.get(i).getString("STARTTIME"));	//9
 				vpd.put("var10", varOList.get(i).getString("ISPUB"));	//10
 				vpd.put("var11", varOList.get(i).get("TOTALNUM").toString());	//11
-				vpd.put("var12", varOList.get(i).get("TOTALWARN").toString());	//12
+				vpd.put("var12", varOList.get(i).getString("TOTALWARN"));	//12
 				vpd.put("var13", varOList.get(i).getString("BRAND"));	//13
 				vpd.put("var14", varOList.get(i).getString("PROMOTIONPRICE"));	//14
 				vpd.put("var15", varOList.get(i).getString("PROMOTIONTIME"));	//15
 				vpd.put("var16", varOList.get(i).get("LIMITNUM").toString());	//16
 				vpd.put("var17", varOList.get(i).getString("MARKETPRICE"));	//17
 				vpd.put("var18", varOList.get(i).getString("FEEDBACKPRICE"));	//18
-				vpd.put("var19", varOList.get(i).getString("ISSHOW"));	//19
+				vpd.put("var19", varOList.get(i).get("ISSHOW").toString());	//19
 				vpd.put("var20", varOList.get(i).getString("LABELID"));	//20
 				vpd.put("var21", varOList.get(i).getString("WEIGHT"));	//21
 				vpd.put("var22", varOList.get(i).getString("ISSALE"));	//22
@@ -255,7 +259,7 @@ public class GoodsController extends BaseController {
 				vpd.put("var25", varOList.get(i).getString("CREATEDATE"));	//25
 				vpd.put("var26", varOList.get(i).get("CREATEBY").toString());	//26
 				vpd.put("var27", varOList.get(i).getString("LASTUPDATE"));	//27
-				vpd.put("var28", varOList.get(i).get("LASTUPDATEBY").toString());	//28
+				vpd.put("var28", varOList.get(i).getString("LASTUPDATEBY"));	//28
 				varList.add(vpd);
 			}
 			dataMap.put("varList", varList);

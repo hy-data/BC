@@ -28,25 +28,22 @@
 				<tr>
 					<td>
 						<span class="input-icon">
-							<input autocomplete="off" id="nav-search-input" type="text" name="GOODS_TITAL" value="" placeholder="这里输入关键词" />
+							<input autocomplete="off" id="nav-search-input" type="text" name="field1" value="" placeholder="这里输入关键词" />
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<%-- <td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td> --%>
+					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
+					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
-					 	<%-- <select class="chzn-select" name="ARTISTSORT_ID" id="ARTISTSORT_ID" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">请选择</option>
-							<c:forEach items="${artistSortList}" var="var" >
-								<option value="${var.ARTISTSORT_ID}">${var.ARTIST_SORT_NAME}</option>
-							</c:forEach>
-							
-					  	</select> --%>
+					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+							<option value="">1</option>
+							<option value="">2</option>
+					  	</select>
 					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
-					<%-- <c:if test="${QX.cha == 1 }">
+					<c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
-					</c:if> --%>
+					</c:if>
 				</tr>
 			</table>
 			<!-- 检索  -->
@@ -60,13 +57,33 @@
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
 						<th>序号</th>
-						<th>商品编号</th>
-						<th>卖家</th>
-						<th>商品标题</th>
-						<th>艺术家/品牌</th>
-						<th>是否推荐</th>
-						<th>新品</th>
-						<th>热销</th>
+						<th>商店</th>
+						<th>商品名称</th>
+						<th>商品主类型</th>
+						<th>商品货号</th>
+						<th>商品关键字</th>
+						<th>商品简单描述</th>
+						<th>主图片地址</th>
+						<th>商品原始价格</th>
+						<th>开始销售时间</th>
+						<th>是否发布</th>
+						<th>库存总数</th>
+						<th>库存警告</th>
+						<th>品牌</th>
+						<th>促销价格</th>
+						<th>促销时间</th>
+						<th>限购数量</th>
+						<th>市场售价</th>
+						<th>分成金额</th>
+						<th>是否在店铺显示</th>
+						<th>推荐标签</th>
+						<th>商品重量</th>
+						<th>快递费</th>
+						<th>是否免费邮寄</th>
+						<th>创建时间</th>
+						<th>创建人</th>
+						<th>更新时间</th>
+						<th>最后更新</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -80,53 +97,51 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.ARTIST_ID}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${var.GOODS_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
-								<td>${var.GOODS_CODE}</td>
-								<td>${var.MEMBER_NICKNAME}</td>
-								<td>${var.GOODS_TITAL}</td>
-								<td>${var.ARTIST_NAME}</td>
-								<td class="center">
-									<c:if test="${var.GOODS_RECOMMEND==0 || var.GOODS_RECOMMEND == null}">
-										<label><input type="checkbox" class="ace-switch ace-switch-3" id="qx${vs.index+1}" <c:if test="${var.GOODS_RECOMMEND == 1 }">checked="checked"</c:if> onclick="kf_qx(this.id,'${var.GOODS_RECOMMEND}','${var.GOODS_ID}','kfqx1')" /><span class="lbl"></span></label>
-									</c:if>
-									<c:if test="${var.GOODS_RECOMMEND==1}">
-										<label><input type="checkbox" class="ace-switch ace-switch-3" id="qx${vs.index+1}" <c:if test="${var.GOODS_RECOMMEND == 1 }">checked="checked"</c:if> onclick="kf_qx(this.id,'${var.GOODS_RECOMMEND}','${var.GOODS_ID}','kfqx1')" /><span class="lbl"></span></label>
-									</c:if>
-								</td>
-								<td>
-									<c:if test="${var.GOODS_RECENT==0 || var.GOODS_RECENT == null}">
-										<a href = "javascript:;" onclick = "goodsrecent('${var.GOODS_ID}','1');">否</a>
-									</c:if>
-									<c:if test="${var.GOODS_RECENT==1}">
-										<a href = "javascript:;" onclick = "goodsrecent('${var.GOODS_ID}','0');">是</a>
-									</c:if>
-								</td>
-								<td>
-									<c:if test="${var.GOODS_HOT==0 || var.GOODS_HOT == null}">
-										<a href = "javascript:;" onclick = "goodshot('${var.GOODS_ID}','1');">否</a>
-									</c:if>
-									<c:if test="${var.GOODS_HOT==1}">
-										<a href = "javascript:;" onclick = "goodshot('${var.GOODS_ID}','0');">是</a>
-									</c:if>
-								</td>
+										<td>${var.SID}</td>
+										<td>${var.NAME}</td>
+										<td>${var.TYPE}</td>
+										<td>${var.CODE}</td>
+										<td>${var.KEYSWORK}</td>
+										<td>${var.TITLE}</td>
+										<td>${var.PICTUREURL}</td>
+										<td>${var.PRICE}</td>
+										<td>${var.STARTTIME}</td>
+										<td>${var.ISPUB}</td>
+										<td>${var.TOTALNUM}</td>
+										<td>${var.TOTALWARN}</td>
+										<td>${var.BRAND}</td>
+										<td>${var.PROMOTIONPRICE}</td>
+										<td>${var.PROMOTIONTIME}</td>
+										<td>${var.LIMITNUM}</td>
+										<td>${var.MARKETPRICE}</td>
+										<td>${var.FEEDBACKPRICE}</td>
+										<td>${var.ISSHOW}</td>
+										<td>${var.LABELID}</td>
+										<td>${var.WEIGHT}</td>
+										<td>${var.EXPRESSPRICE}</td>
+										<td>${var.ISEXPRESS}</td>
+										<td>${var.CREATEDATE}</td>
+										<td>${var.CREATEBY}</td>
+										<td>${var.LASTUPDATE}</td>
+										<td>${var.LASTUPDATEBY}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
+									
 										<c:if test="${QX.edit != 1 && QX.del != 1 }">
 										<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="icon-lock" title="无权限"></i></span>
 										</c:if>
 										<div class="inline position-relative">
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-											<li><a style="cursor:pointer;" title="查看商品详情" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','goods/selectGoods.do?GOODS_ID=${var.GOODS_ID}');" data-rel="tooltip"  data-placement="left"><span class="purple"><i class="icon-film"></i></span> </a></li>
-											<li><a style="cursor:pointer;" title="查看商品参数" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','goods/selectParas.do?GOODS_ID=${var.GOODS_ID}');" data-rel="tooltip"  data-placement="left"><span class="purple"><i class="icon-film"></i></span> </a></li>
-											<li><a style="cursor:pointer;" title="查看商品规格" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','goods/selectSpecs.do?GOODS_ID=${var.GOODS_ID}');" data-rel="tooltip"  data-placement="left"><span class="purple"><i class="icon-film"></i></span> </a></li>
-											<li><a style="cursor:pointer;" title="编辑商品基本属性" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','goods/updateGoods.do?GOODS_ID=${var.GOODS_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											<li><a style="cursor:pointer;" title="编辑商品参数" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','paravalue/updatePara.do?GOODS_ID=${var.GOODS_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											<li><a style="cursor:pointer;" title="编辑商品规格" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','goodsspecs/updateSpecs.do?GOODS_ID=${var.GOODS_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											<li><a style="cursor:pointer;" title="管理关键字" onclick="selecttbgoods('${var.GOODS_ID }','${var.GOODS_TITAL }','goodskeywords/list.do?GOODS_ID=${var.GOODS_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<c:if test="${QX.edit == 1 }">
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.GOODS_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											</c:if>
+											<c:if test="${QX.del == 1 }">
 											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.GOODS_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											</c:if>
 										</ul>
 										</div>
 									</div>
@@ -153,7 +168,7 @@
 			</table>
 			
 		<div class="page-header position-relative">
-		<%-- <table style="width:100%;">
+		<table style="width:100%;">
 			<tr>
 				<td style="vertical-align:top;">
 					<c:if test="${QX.add == 1 }">
@@ -165,7 +180,7 @@
 				</td>
 				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
 			</tr>
-		</table> --%>
+		</table>
 		</div>
 		</form>
 	</div>
@@ -198,53 +213,10 @@
 		<script type="text/javascript">
 		
 		$(top.hangge());
-
-		function selecttbgoods(id,MENU_NAME,MENU_URL){
-			top.mainFrame.tabAddHandler(id,MENU_NAME,MENU_URL);
-			if(MENU_URL != "druid/index.html"){
-				jzts();
-			}
-		}
-		
-		function goodshot(id, flag){
-			$.ajax({
-                url: "<%=basePath%>goods/updateHot.do",
-                async:false, 
-                type :'post',
-                data:{'GOODS_ID':id,'GOODS_HOT':flag},
-                dataType : "json",
-                success: function(data) {
-                	var obj = eval(data);
-                	if(obj.result == 'ok'){
-                		 location.reload();
-                	}else{
-                		alert("操作失败");
-                	}
-                }
-        	});
-		}
-		function goodsrecent(id, flag){
-			$.ajax({
-				url: "<%=basePath%>goods/updateRecent.do",
-                async:false, 
-                type :'post',
-                data:{'GOODS_ID':id,'GOODS_RECENT':flag},
-                dataType : "json",
-                success: function(data) {
-                	var obj = eval(data);
-                	if(obj.result == 'ok'){
-                		location.reload();
-                	}else{
-                		alert("操作失败");
-                	}
-                }
-        	});
-		}
 		
 		//检索
 		function search(){
 			top.jzts();
-			debugger
 			$("#Form").submit();
 		}
 		
@@ -254,9 +226,9 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>artist/goAdd.do';
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.URL = '<%=basePath%>goods/goAdd.do';
+			 diag.Width = 600;
+			 diag.Height = 500;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
@@ -290,9 +262,9 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>artist/goEdit.do?ARTIST_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.URL = '<%=basePath%>goods/goEdit.do?GOODS_ID='+Id;
+			 diag.Width = 600;
+			 diag.Height = 500;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});
@@ -366,7 +338,7 @@
 							top.jzts();
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>artist/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>goods/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -383,42 +355,9 @@
 			});
 		}
 		
-		var hcid = '';
-		var qxhc = '';
-		function kf_qx(id,status,kefu_id,msg){
-			if(id != hcid){
-				hcid = id;
-				qxhc = '';
-			}
-			var value = 1;
-			var wqx = $("#"+id).attr("checked");
-			if(qxhc == ''){
-				if(wqx == 'checked'){
-					qxhc = 'checked';
-				}else{
-					qxhc = 'unchecked';
-				}
-			}
-			if(qxhc == 'checked'){
-				value = 1;
-				qxhc = 'unchecked';
-			}else{
-				value = 0;
-				qxhc = 'checked';
-			}
-			
-			var url ='<%=basePath%>goods/editRECOMMEND.do?GOODS_ID='+kefu_id+'&GOODS_RECOMMEND='+ value +'';
-				$.get(url,function(data){
-				//	var data = eval('(' + data + ')');
-					if(data=="1"){
-						document.location.reload();
-					}
-				});
-		}
-		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>artist/excel.do';
+			window.location.href='<%=basePath%>goods/excel.do';
 		}
 		</script>
 		
