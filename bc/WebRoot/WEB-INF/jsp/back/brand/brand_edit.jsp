@@ -42,16 +42,6 @@
 			$("#NAME").focus();
 			return false;
 		}
-		if($("#URL").val()==""){
-			$("#URL").tips({
-				side:3,
-	            msg:'请输入品牌网址',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#URL").focus();
-			return false;
-		}
 		if($("#LOGO_IMAGE").val()==""){
 			$("#LOGO_IMAGE").tips({
 				side:3,
@@ -90,8 +80,8 @@
 </script>
 	</head>
 <body>
-	<form action="brand/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="BRAND_ID" id="BRAND_ID" value="${pd.BRAND_ID}"/>
+	<form action="brand/${msg}.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
@@ -101,13 +91,27 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="URL" id="URL" value="${pd.URL}" maxlength="32" placeholder="这里输入品牌网址" title="品牌网址"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="LOGO_IMAGE" id="LOGO_IMAGE" value="${pd.LOGO_IMAGE}" maxlength="32" placeholder="这里输入品牌LOGO" title="品牌LOGO"/></td>
+				<c:if test="${pd.ID!=null}">
+				<input type="hidden" id="LOGO_IMAGE" name = "LOGO_IMAGE" value="${pd.LOGO_IMAGE}"  maxlength="32"/>
+				<td>品牌Logo：<input style="width:400px;margin-top:5px;" type="file" name="LOGO_IMAGE" maxlength="32" placeholder="这里输入品牌LOGO" title="品牌LOGO"/></td>
+				</c:if>
+				<c:if test="${pd.ID==null}">
+				<td>品牌Logo：<input style="width:400px;margin-top:5px;" type="file" name="LOGO_IMAGE" value="${pd.LOGO_IMAGE}" maxlength="32" placeholder="这里输入品牌LOGO" title="品牌LOGO"/></td>
+				</c:if>
 			</tr>
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="DESCRIPTION" id="DESCRIPTION" value="${pd.DESCRIPTION}" maxlength="32" placeholder="这里输入品牌描述" title="品牌描述"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="IS_SHOW" id="IS_SHOW" value="${pd.IS_SHOW}" maxlength="32" placeholder="这里输入是否显示" title="是否显示"/></td>
+				<td><input style="width:400px;margin-top:5px;" type="number" name="SORT" id="SORT" value="${pd.SORT}" maxlength="32" placeholder="排序" title="排序"/></td>
+			</tr>
+			<tr>
+				<td>是否显示： 
+					<select class="chzn-select" name="IS_SHOW" id="IS_SHOW"  data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+						<option value="0" <c:if test="${pd.IS_SHOW=='0'}"> selected="selected"</c:if>>是</option>
+						<option value="1" <c:if test="${pd.IS_SHOW=='1'}"> selected="selected"</c:if>>否</option>
+				  	</select>
+				</td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">
@@ -134,7 +138,7 @@
 		$(top.hangge());
 		$(function() {
 			
-			//单选框
+			//单选框r
 			$(".chzn-select").chosen(); 
 			$(".chzn-select-deselect").chosen({allow_single_deselect:true}); 
 			

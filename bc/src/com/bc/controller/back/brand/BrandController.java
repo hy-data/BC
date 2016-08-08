@@ -19,20 +19,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.controller.base.BaseController;
 import com.bc.entity.Page;
 import com.bc.service.back.brand.BrandService;
 import com.bc.util.Const;
+import com.bc.util.DateUtil;
+import com.bc.util.FileUpload;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
 import com.bc.util.PageData;
+import com.bc.util.PathUtil;
 
 /** 
  * 类名称：BrandController
- * 创建人：FH 
+ * 创建人：liuqiang
  * 创建时间：2016-08-08
  */
 @Controller
@@ -45,16 +50,33 @@ public class BrandController extends BaseController {
 	/**
 	 * 新增
 	 */
-	@RequestMapping(value="/save")
-	public ModelAndView save() throws Exception{
-		logBefore(logger, "新增Brand");
+	
+	@RequestMapping(value = "/save")
+	public ModelAndView save(
+			@RequestParam(value = "LOGO_IMAGE", required = false) MultipartFile LOGO_IMAGE,
+			String NAME, String URL,
+			String DESCRIPTION, String IS_SHOW, String SORT)
+			throws Exception {
+		logBefore(logger, "新增ArtworkSort");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("BRAND_ID", this.get32UUID());	//主键
-		pd.put("SORT", "");	//排序
+		if (LOGO_IMAGE != null && !LOGO_IMAGE.isEmpty()) {
+			String ffile = DateUtil.getDays(), fileName = "";
+
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG
+					+ ffile; // 文件上传路径
+			fileName = FileUpload.fileUp(LOGO_IMAGE, filePath, this.get32UUID());
+			pd.put("LOGO_IMAGE", Const.FILEPATHIMG + ffile + "/"
+					+ fileName);
+		}
+		pd.put("NAME", NAME); // 主键
+		pd.put("URL", URL);
+		pd.put("DESCRIPTION", DESCRIPTION);
+		pd.put("IS_SHOW", Integer.parseInt(IS_SHOW));
+		pd.put("SORT", Integer.parseInt(SORT));
 		brandService.save(pd);
-		mv.addObject("msg","success");
+		mv.addObject("msg", "success");
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -80,17 +102,37 @@ public class BrandController extends BaseController {
 	/**
 	 * 修改
 	 */
-	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
-		logBefore(logger, "修改Brand");
+	@RequestMapping(value = "/edit")
+	public ModelAndView edit(
+			@RequestParam(value = "LOGO_IMAGE", required = false) MultipartFile LOGO_IMAGE,String ID, 
+			String NAME, String URL,
+			String DESCRIPTION, String IS_SHOW, String SORT)
+			throws Exception {
+		logBefore(logger, "新增ArtworkSort");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
+		pd.put("ID", ID);
+		pd = brandService.findById(pd);
+		if (LOGO_IMAGE != null && !LOGO_IMAGE.isEmpty()) {
+			String ffile = DateUtil.getDays(), fileName = "";
+
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG
+					+ ffile; // 文件上传路径
+			fileName = FileUpload.fileUp(LOGO_IMAGE, filePath, this.get32UUID());
+			pd.put("LOGO_IMAGE", Const.FILEPATHIMG + ffile + "/"
+					+ fileName);
+		}
+		pd.put("NAME", NAME); // 主键
+		pd.put("URL", URL);
+		pd.put("DESCRIPTION", DESCRIPTION);
+		pd.put("IS_SHOW", Integer.parseInt(IS_SHOW));
+		pd.put("SORT", Integer.parseInt(SORT));
 		brandService.edit(pd);
-		mv.addObject("msg","success");
+		mv.addObject("msg", "success");
 		mv.setViewName("save_result");
 		return mv;
 	}
+	
 	
 	/**
 	 * 列表
@@ -104,7 +146,7 @@ public class BrandController extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = brandService.list(page);	//列出Brand列表
-			mv.setViewName("brand/brand/brand_list");
+			mv.setViewName("back/brand/brand_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
@@ -124,7 +166,7 @@ public class BrandController extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
-			mv.setViewName("brand/brand/brand_edit");
+			mv.setViewName("back/brand/brand_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -144,7 +186,7 @@ public class BrandController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = brandService.findById(pd);	//根据ID读取
-			mv.setViewName("brand/brand/brand_edit");
+			mv.setViewName("back/brand/brand_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
