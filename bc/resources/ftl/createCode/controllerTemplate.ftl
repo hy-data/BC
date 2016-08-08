@@ -1,4 +1,4 @@
-package com.wallart.controller.${packageName}.${objectNameLower};
+package com.bc.controller.${objectNameLower};
 
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -136,7 +136,7 @@ public class ${objectName}Controller extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
-			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
+			mv.setViewName("back/${objectNameLower}/${objectNameLower}_edit");
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
@@ -156,7 +156,7 @@ public class ${objectName}Controller extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = ${objectNameLower}Service.findById(pd);	//根据ID读取
-			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
+			mv.setViewName("back/${objectNameLower}/${objectNameLower}_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {

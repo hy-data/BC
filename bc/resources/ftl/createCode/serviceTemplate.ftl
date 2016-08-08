@@ -1,4 +1,4 @@
-package com.wallart.service.${packageName}.${objectNameLower};
+package com.bc.service.${objectNameLower};
 
 import java.util.List;
 

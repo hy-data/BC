@@ -89,7 +89,7 @@
 	
 </script>
 	</head>
-<body>
+<body> 
 	<form action="circle/${msg }.do" name="Form" id="Form" method="post">
 		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
