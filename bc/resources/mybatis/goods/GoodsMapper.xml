@@ -33,7 +33,8 @@
 			CREATEDATE,	
 			CREATEBY,	
 			LASTUPDATE,	
-			LASTUPDATEBY,	
+			LASTUPDATEBY,
+			DESCRIPTION,	
 			ID
 		) values (
 			#{SID},	
@@ -64,6 +65,7 @@
 			#{CREATEBY},	
 			#{LASTUPDATE},	
 			#{LASTUPDATEBY},	
+			#{DESCRIPTION},	
 			#{ID}
 		)
 	</insert>
@@ -109,6 +111,7 @@
 				CREATEBY = #{CREATEBY},
 				LASTUPDATE = #{LASTUPDATE},
 				LASTUPDATEBY = #{LASTUPDATEBY},
+				DESCRIPTION = #{DESCRIPTION}
 			ID = ID
 			where 
 				ID = #{ID}
@@ -145,7 +148,8 @@
 			CREATEDATE,	
 			CREATEBY,	
 			LASTUPDATE,	
-			LASTUPDATEBY,	
+			LASTUPDATEBY,
+			DESCRIPTION,
 			ID
 		from 
 			bc_goods
@@ -184,7 +188,8 @@
 				a.CREATEDATE,	
 				a.CREATEBY,	
 				a.LASTUPDATE,	
-				a.LASTUPDATEBY,	
+				a.LASTUPDATEBY,
+				a.DESCRIPTION,
 				a.ID
 		from 
 				bc_goods a
@@ -220,7 +225,8 @@
 				a.CREATEDATE,	
 				a.CREATEBY,	
 				a.LASTUPDATE,	
-				a.LASTUPDATEBY,	
+				a.LASTUPDATEBY,
+				a.DESCRIPTION,
 				a.ID
 		from 
 				bc_goods a

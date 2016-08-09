@@ -19,17 +19,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bc.controller.base.BaseController;
 import com.bc.entity.Page;
+import com.bc.entity.system.User;
 import com.bc.service.back.goods.GoodsService;
 import com.bc.util.Const;
+import com.bc.util.DateUtil;
+import com.bc.util.FileUpload;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
 import com.bc.util.PageData;
-import com.bc.util.Tools;
+import com.bc.util.PathUtil;
 
 /** 
  * 类名称：GoodsController
@@ -46,18 +51,75 @@ public class GoodsController extends BaseController {
 	/**
 	 * 新增
 	 */
-	@RequestMapping(value="/save")
-	public ModelAndView save() throws Exception{
-		logBefore(logger, "新增Goods");
+	
+	@RequestMapping(value = "/save")
+	public ModelAndView save(
+			@RequestParam(value = "PICTUREURL", required = false) MultipartFile PICTUREURL,
+			String SID,
+			String NAME,
+			String TYPE,
+			String CODE,
+			String KEYSWORK,
+			String TITLE,
+			String PRICE,
+			String STARTTIME,
+			String ISPUB,
+			String TOTALNUM,
+			String TOTALWARN,
+			String BRAND,
+			String PROMOTIONTIME,
+			String PROMOTIONPRICE,
+			String LIMITNUM,
+			String ISSHOW,
+			String WEIGHT,
+			String ISSALE,
+			String ISEXPRESS,
+			String DESCRIPTION
+			)
+			throws Exception {
+		logBefore(logger, "新增ArtworkSort");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("GOODS_ID", this.get32UUID());	//主键
-		pd.put("CREATEDATE", Tools.date2Str(new Date()));	//创建时间
-		pd.put("CREATEBY", "");	//创建人
-		pd.put("LASTUPDATEBY", "");	//最后更新
+		if (PICTUREURL != null && !PICTUREURL.isEmpty()) {
+			String ffile = DateUtil.getDays(), fileName = "";
+
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG
+					+ ffile; // 文件上传路径
+			fileName = FileUpload.fileUp(PICTUREURL, filePath, this.get32UUID());
+			pd.put("PICTUREURL", Const.FILEPATHIMG + ffile + "/"
+					+ fileName);
+		}
+		pd.put("SID", SID); // 主键
+		pd.put("NAME", SID);
+		pd.put("TYPE", TYPE);
+		pd.put("CODE", CODE);
+		pd.put("KEYSWORK", KEYSWORK);
+		pd.put("TITLE", TITLE);
+		pd.put("PRICE", PRICE);
+		pd.put("STARTTIME", STARTTIME);
+		pd.put("ISPUB", ISPUB);
+		pd.put("TOTALNUM", TOTALNUM);
+		pd.put("TOTALWARN", TOTALWARN);
+		pd.put("BRAND", BRAND);
+		pd.put("PROMOTIONTIME", PROMOTIONTIME);
+		pd.put("PROMOTIONPRICE", PROMOTIONPRICE);
+		pd.put("LIMITNUM", LIMITNUM);
+		pd.put("ISSHOW", ISSHOW);
+		pd.put("WEIGHT", WEIGHT);
+		pd.put("ISSALE", ISSALE);
+		pd.put("ISEXPRESS", ISEXPRESS);
+		pd.put("DESCRIPTION", DESCRIPTION);
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
+		User user = (User)session.getAttribute(Const.SESSION_USER);
+		pd.put("CREATEDATE", DateUtil.getTime());
+		pd.put("CREATEBY", user.getNAME() + "," + user.getIP());
+		pd.put("LASTUPDATE", DateUtil.getTime());
+		pd.put("LASTUPDATEBY", user.getNAME() + "," + user.getIP());
+		
 		goodsService.save(pd);
-		mv.addObject("msg","success");
+		mv.addObject("msg", "success");
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -69,7 +131,7 @@ public class GoodsController extends BaseController {
 	public void delete(PrintWriter out){
 		logBefore(logger, "删除Goods");
 		PageData pd = new PageData();
-		try{
+		try{ 
 			pd = this.getPageData();
 			goodsService.delete(pd);
 			out.write("success");
@@ -84,13 +146,75 @@ public class GoodsController extends BaseController {
 	 * 修改
 	 */
 	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
+	public ModelAndView edit(
+			@RequestParam(value = "PICTUREURL", required = false) MultipartFile PICTUREURL,
+			String ID,
+			String SID,
+			String NAME,
+			String TYPE,
+			String CODE,
+			String KEYSWORK,
+			String TITLE,
+			String PRICE,
+			String STARTTIME,
+			String ISPUB,
+			String TOTALNUM,
+			String TOTALWARN,
+			String BRAND,
+			String PROMOTIONTIME,
+			String PROMOTIONPRICE,
+			String LIMITNUM,
+			String ISSHOW,
+			String WEIGHT,
+			String ISSALE,
+			String ISEXPRESS,
+			String DESCRIPTION
+			)
+			throws Exception {
 		logBefore(logger, "修改Goods");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("ID", ID.trim());
+		pd = goodsService.findById(pd);
+		if (PICTUREURL != null && !PICTUREURL.isEmpty()) {
+			String ffile = DateUtil.getDays(), fileName = "";
+
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG
+					+ ffile; // 文件上传路径
+			fileName = FileUpload.fileUp(PICTUREURL, filePath, this.get32UUID());
+			pd.put("PICTUREURL", Const.FILEPATHIMG + ffile + "/"
+					+ fileName);
+		}
+		pd.put("SID", SID); // 主键
+		pd.put("NAME", SID);
+		pd.put("TYPE", TYPE);
+		pd.put("CODE", CODE);
+		pd.put("KEYSWORK", KEYSWORK);
+		pd.put("TITLE", TITLE);
+		pd.put("PRICE", PRICE);
+		pd.put("STARTTIME", STARTTIME);
+		pd.put("ISPUB", ISPUB);
+		pd.put("TOTALNUM", TOTALNUM);
+		pd.put("TOTALWARN", TOTALWARN);
+		pd.put("BRAND", BRAND);
+		pd.put("PROMOTIONTIME", PROMOTIONTIME);
+		pd.put("PROMOTIONPRICE", PROMOTIONPRICE);
+		pd.put("LIMITNUM", LIMITNUM);
+		pd.put("ISSHOW", ISSHOW);
+		pd.put("WEIGHT", WEIGHT);
+		pd.put("ISSALE", ISSALE);
+		pd.put("ISEXPRESS", ISEXPRESS);
+		pd.put("DESCRIPTION", DESCRIPTION);
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
+		User user = (User)session.getAttribute(Const.SESSION_USER);
+		pd.put("CREATEDATE", DateUtil.getTime());
+		pd.put("CREATEBY", user.getNAME() + "," + user.getIP());
+		pd.put("LASTUPDATE", DateUtil.getTime());
+		pd.put("LASTUPDATEBY", user.getNAME() + "," + user.getIP());
 		goodsService.edit(pd);
-		mv.addObject("msg","success");
+		mv.addObject("msg", "success");
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -155,6 +279,39 @@ public class GoodsController extends BaseController {
 		}						
 		return mv;
 	}	
+	
+	/**
+	 * 上传图片
+	 * 
+	 * @param file
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/upImage")
+	@ResponseBody
+	public Object upImage(
+			@RequestParam(required = false) MultipartFile uploadImg)
+			throws Exception {
+		PageData pd = new PageData();
+		String name = this.get32UUID();
+		Map<String, String> map = new HashMap<String, String>();
+		String ffile = DateUtil.getDays(), fileName = "";
+		if (null != uploadImg && !uploadImg.isEmpty()) {
+			long size = uploadImg.getSize();
+			if (size > 1024 * 300) {
+				map.put("result", "error");
+				return JSONUtil.returnObject(pd, map);
+			}
+			String filePath = PathUtil.getClasspath() + Const.FILEPATHIMG
+					+ Const.UPLOAD_ARTWORK_IMAGE_PATH + ffile; // 鏂囦欢涓婁紶璺緞
+			fileName = FileUpload.fileUp(uploadImg, filePath, name);
+		}
+		map.put("result", "ok");
+		map.put("path", Const.FILEPATHIMG + Const.UPLOAD_ARTWORK_IMAGE_PATH
+				+ ffile + "/" + fileName);
+		map.put("id", name);
+		return JSONUtil.returnObject(pd, map);
+	}
 	
 	/**
 	 * 批量删除

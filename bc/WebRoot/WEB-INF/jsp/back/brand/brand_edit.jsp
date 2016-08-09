@@ -42,16 +42,6 @@
 			$("#NAME").focus();
 			return false;
 		}
-		if($("#LOGO_IMAGE").val()==""){
-			$("#LOGO_IMAGE").tips({
-				side:3,
-	            msg:'请输入品牌LOGO',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#LOGO_IMAGE").focus();
-			return false;
-		}
 		if($("#DESCRIPTION").val()==""){
 			$("#DESCRIPTION").tips({
 				side:3,
@@ -91,13 +81,7 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="URL" id="URL" value="${pd.URL}" maxlength="32" placeholder="这里输入品牌网址" title="品牌网址"/></td>
 			</tr>
 			<tr>
-				<c:if test="${pd.ID!=null}">
-				<input type="hidden" id="LOGO_IMAGE" name = "LOGO_IMAGE" value="${pd.LOGO_IMAGE}"  maxlength="32"/>
-				<td>品牌Logo：<input style="width:400px;margin-top:5px;" type="file" name="LOGO_IMAGE" maxlength="32" placeholder="这里输入品牌LOGO" title="品牌LOGO"/></td>
-				</c:if>
-				<c:if test="${pd.ID==null}">
 				<td>品牌Logo：<input style="width:400px;margin-top:5px;" type="file" name="LOGO_IMAGE" value="${pd.LOGO_IMAGE}" maxlength="32" placeholder="这里输入品牌LOGO" title="品牌LOGO"/></td>
-				</c:if>
 			</tr>
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="DESCRIPTION" id="DESCRIPTION" value="${pd.DESCRIPTION}" maxlength="32" placeholder="这里输入品牌描述" title="品牌描述"/></td>

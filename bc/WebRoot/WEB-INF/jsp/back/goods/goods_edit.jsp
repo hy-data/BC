@@ -24,10 +24,13 @@
 		<link rel="stylesheet" href="static/css/ace-skins.min.css" />
 		
 		<link rel="stylesheet" href="static/css/datepicker.css" /><!-- 日期框 -->
-		<script type="text/javascript" src="static/js/jquery-1.7.2.js"></script>
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+		<script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
 			  <!-- 编辑器 -->
 		<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
+		
+	     <link  href="static/css/cropper.min.css" rel="stylesheet">
 <script type="text/javascript">
 	
 	
@@ -291,7 +294,7 @@
 </script>
 	</head>
 <body>
-	<form action="goods/${msg }.do" name="Form" id="Form" method="post">
+	<form action="goods/${msg}.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="GOODS_ID" id="GOODS_ID" value="${pd.GOODS_ID}"/>
 		<div id="zhongxin">
 		<table>
@@ -314,13 +317,13 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="TITLE" id="TITLE" value="${pd.TITLE}" maxlength="32" placeholder="这里输入商品简单描述" title="商品简单描述"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="PICTUREURL" id="PICTUREURL" value="${pd.PICTUREURL}" maxlength="32" placeholder="这里输入主图片地址" title="主图片地址"/></td>
+				<td>商品主图：<input style="width:400px;margin-top:5px;" type="file" name="PICTUREURL" id="PICTUREURL" /></td>
 			</tr>
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32" placeholder="这里输入商品原始价格" title="商品原始价格"/></td>
 			</tr>
 			<tr>
-				<td><input class="span10 date-picker" name="STARTTIME" id="STARTTIME" value="${pd.STARTTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="开始销售时间" title="开始销售时间"/></td>
+				<td><input  style="width:400px;margin-top:5px;" class="span10 date-picker" name="STARTTIME" id="STARTTIME" value="${pd.STARTTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="开始销售时间" title="开始销售时间"/></td>
 			</tr>
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="ISPUB" id="ISPUB" value="${pd.ISPUB}" maxlength="32" placeholder="这里输入是否发布" title="是否发布"/></td>
@@ -338,7 +341,7 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="PROMOTIONPRICE" id="PROMOTIONPRICE" value="${pd.PROMOTIONPRICE}" maxlength="32" placeholder="这里输入促销价格" title="促销价格"/></td>
 			</tr>
 			<tr>
-				<td><input class="span10 date-picker" name="PROMOTIONTIME" id="PROMOTIONTIME" value="${pd.PROMOTIONTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="促销时间" title="促销时间"/></td>
+				<td><input  style="width:400px;margin-top:5px;" class="span10 date-picker" name="PROMOTIONTIME" id="PROMOTIONTIME" value="${pd.PROMOTIONTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="促销时间" title="促销时间"/></td>
 			</tr>
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="number" name="LIMITNUM" id="LIMITNUM" value="${pd.LIMITNUM}" maxlength="32" placeholder="这里输入限购数量" title="限购数量"/></td>
@@ -368,14 +371,17 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="ISEXPRESS" id="ISEXPRESS" value="${pd.ISEXPRESS}" maxlength="32" placeholder="这里输入是否免费邮寄" title="是否免费邮寄"/></td>
 			</tr>
 			<tr>
-				<td><input class="span10 date-picker" name="LASTUPDATE" id="LASTUPDATE" value="${pd.LASTUPDATE}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="更新时间" title="更新时间"/></td>
-			</tr>
+                  	<td>图文详情图片地址<input type="file" name="uploadImg" id="uploadImg" onchange="uploadother('DETAILIMAGE');" /></td>
+                   </tr>
+                   <tr>
+                   	<td><input type="text" id = "detailimage" /></td>
+                   </tr>
 			<tr>
-                  <td>图文详情<textarea name="GOODS_DETAILS" id="GOODS_DETAILS" cols="40" rows="40"></textarea></td>
+                  <td><textarea name="DESCRIPTION" id="DESCRIPTION" cols="40" rows="40"></textarea></td>
                   <script>
 	                // Replace the <textarea id="editor1"> with a CKEditor
 	                // instance, using default configuration.
-	                CKEDITOR.replace( 'GOODS_DETAILS' );
+	                CKEDITOR.replace( 'DESCRIPTION' );
 	            </script>
              </tr>
 			<tr>
@@ -400,6 +406,7 @@
 		<script type="text/javascript" src="static/js/chosen.jquery.min.js"></script><!-- 下拉框 -->
 		<script type="text/javascript" src="static/js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
 		<script type="text/javascript">
+		var uploadImgUrl = "<%=basePath%>goods/upImage";
 		$(top.hangge());
 		$(function() {
 			
@@ -411,6 +418,36 @@
 			$('.date-picker').datepicker();
 			
 		});
+		//上传商品其他主图
+		function uploadother(image_type) {
+			$.ajaxFileUpload({
+				url : uploadImgUrl,//处理图片脚本
+				dataType : 'json',
+				secureuri : false,
+				async: false,
+				type:'post',
+				fileElementId : 'uploadImg',//file控件id
+				success : function(data, status) {
+					var obj = eval(data);
+					alert(obj.result);
+					if (obj.result == "ok") {//上传成功
+						if (obj.path != null && obj.path.length != 0) {
+							if(image_type == "DETAILIMAGE")
+								$("#detailimage").val(obj.path);
+							if(image_type == "PICTUREURL")
+								$("#PICTUREURL").val(obj.path);
+							
+						} else {
+							//alert("图片文件不能超过300K请处理后上传");
+							showInfo(pic,'文件超过300k');
+						}
+					}
+				},
+				error: function(data, status, e){
+			        alert(data.responseText);
+			    }
+			});
+		}
 		</script>
 </body>
 </html>

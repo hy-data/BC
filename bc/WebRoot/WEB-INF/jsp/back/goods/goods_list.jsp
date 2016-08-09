@@ -70,20 +70,7 @@
 						<th>库存总数</th>
 						<th>库存警告</th>
 						<th>品牌</th>
-						<th>促销价格</th>
-						<th>促销时间</th>
-						<th>限购数量</th>
-						<th>市场售价</th>
-						<th>分成金额</th>
-						<th>是否在店铺显示</th>
 						<th>推荐标签</th>
-						<th>商品重量</th>
-						<th>快递费</th>
-						<th>是否免费邮寄</th>
-						<th>创建时间</th>
-						<th>创建人</th>
-						<th>更新时间</th>
-						<th>最后更新</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -113,23 +100,9 @@
 										<td>${var.TOTALNUM}</td>
 										<td>${var.TOTALWARN}</td>
 										<td>${var.BRAND}</td>
-										<td>${var.PROMOTIONPRICE}</td>
-										<td>${var.PROMOTIONTIME}</td>
-										<td>${var.LIMITNUM}</td>
-										<td>${var.MARKETPRICE}</td>
-										<td>${var.FEEDBACKPRICE}</td>
-										<td>${var.ISSHOW}</td>
 										<td>${var.LABELID}</td>
-										<td>${var.WEIGHT}</td>
-										<td>${var.EXPRESSPRICE}</td>
-										<td>${var.ISEXPRESS}</td>
-										<td>${var.CREATEDATE}</td>
-										<td>${var.CREATEBY}</td>
-										<td>${var.LASTUPDATE}</td>
-										<td>${var.LASTUPDATEBY}</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
-									
 										<c:if test="${QX.edit != 1 && QX.del != 1 }">
 										<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="icon-lock" title="无权限"></i></span>
 										</c:if>
