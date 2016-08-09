@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.controller.base.BaseController;
 import com.bc.entity.Page;
 import com.bc.entity.system.User;
+import com.bc.service.back.brand.BrandService;
 import com.bc.service.back.goods.GoodsService;
 import com.bc.util.Const;
 import com.bc.util.DateUtil;
@@ -47,7 +48,8 @@ public class GoodsController extends BaseController {
 	
 	@Resource(name="goodsService")
 	private GoodsService goodsService;
-	
+	@Resource(name="brandService")
+	private BrandService brandService;
 	/**
 	 * 新增
 	 */
@@ -66,7 +68,7 @@ public class GoodsController extends BaseController {
 			String ISPUB,
 			String TOTALNUM,
 			String TOTALWARN,
-			String BRAND,
+			String BRAND_ID,
 			String PROMOTIONTIME,
 			String PROMOTIONPRICE,
 			String LIMITNUM,
@@ -101,7 +103,7 @@ public class GoodsController extends BaseController {
 		pd.put("ISPUB", ISPUB);
 		pd.put("TOTALNUM", TOTALNUM);
 		pd.put("TOTALWARN", TOTALWARN);
-		pd.put("BRAND", BRAND);
+		pd.put("BRAND", BRAND_ID);
 		pd.put("PROMOTIONTIME", PROMOTIONTIME);
 		pd.put("PROMOTIONPRICE", PROMOTIONPRICE);
 		pd.put("LIMITNUM", LIMITNUM);
@@ -311,6 +313,28 @@ public class GoodsController extends BaseController {
 				+ ffile + "/" + fileName);
 		map.put("id", name);
 		return JSONUtil.returnObject(pd, map);
+	}
+	
+	/**
+	 * 选择品牌列表
+	 */
+	@RequestMapping(value = "/addBrand")
+	public ModelAndView addBrand(Page page) {
+		logBefore(logger, "列表addBrand");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		try {
+			pd = this.getPageData();
+			page.setPd(pd);
+			List<PageData> varList = brandService.list(page); // 列出TbArtiset列表
+			mv.setViewName("back/goods/brand_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX, this.getHC()); // 按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}
+		return mv;
 	}
 	
 	/**

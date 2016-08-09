@@ -295,7 +295,7 @@
 	</head>
 <body>
 	<form action="goods/${msg}.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="GOODS_ID" id="GOODS_ID" value="${pd.GOODS_ID}"/>
+		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
@@ -335,8 +335,9 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="TOTALWARN" id="TOTALWARN" value="${pd.TOTALWARN}" maxlength="32" placeholder="这里输入库存警告" title="库存警告"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="BRAND" id="BRAND" value="${pd.BRAND}" maxlength="32" placeholder="这里输入品牌" title="品牌"/></td>
+				<td><input style="width:100px;margin-top:5px;" type="button" name="BRAND" id="BRAND" value="品牌" maxlength="32"  title="品牌" onclick = "addBrand();"/></td>
 			</tr>
+				<input type = "hidden" id = "BRAND_ID" />	
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="PROMOTIONPRICE" id="PROMOTIONPRICE" value="${pd.PROMOTIONPRICE}" maxlength="32" placeholder="这里输入促销价格" title="促销价格"/></td>
 			</tr>
@@ -447,6 +448,26 @@
 			        alert(data.responseText);
 			    }
 			});
+		}
+		//添加品牌
+	    function addBrand(){
+	    	top.jzts();
+	    	var diag = new top.Dialog();
+			 diag.Drag=true;
+			 diag.Title ="品牌";
+			 diag.URL = '<%=basePath%>goods/addBrand.do';
+			 diag.Width = 900;
+			 diag.Height = 500;
+			 diag.CancelEvent = function(){ //关闭事件
+				 var BRAND_ID = $(diag.innerFrame.contentWindow.document.getElementById('BRAND_ID')).val();
+			  	 var BRAND = $(diag.innerFrame.contentWindow.document.getElementById('BRAND')).val();
+			  	 if(BRAND_ID != null && BRAND_ID != "")
+				 	$("#BRAND_ID").val(BRAND_ID);
+			  	if(BRAND != null && BRAND != "")
+				    $("#BRAND").val(BRAND); 
+				diag.close();
+			 };
+			 diag.show();
 		}
 		</script>
 </body>
