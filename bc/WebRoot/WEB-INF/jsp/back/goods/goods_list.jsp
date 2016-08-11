@@ -32,18 +32,23 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td style="vertical-align:top;"> 
+					 	<select class="chzn-select" name="field1" id="field1" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+							<option value="1">热门</option>
+							<option value="2">精选</option>
+							<option value="3">促销</option>
+					  	</select>
+					</td>
 					<td style="vertical-align:top;"> 
 					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
+							<option value="1">上架</option>
+							<option value="2">下架</option>
 					  	</select>
 					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
-					<c:if test="${QX.cha == 1 }">
+					<%-- <c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
-					</c:if>
+					</c:if> --%>
 				</tr>
 			</table>
 			<!-- 检索  -->
@@ -145,10 +150,10 @@
 			<tr>
 				<td style="vertical-align:top;">
 					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
+					<a class="btn btn-small btn-success" onclick="add();">新增基本信息</a>
 					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
+					<c:if test="${QX.add == 1 }">
+					<a class="btn btn-small btn-success" onclick="addProperty();">新增属性</a>
 					</c:if>
 				</td>
 				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
@@ -195,6 +200,28 @@
 		
 		//新增
 		function add(){
+			 top.jzts();
+			 var diag = new top.Dialog();
+			 diag.Drag=true;
+			 diag.Title ="新增";
+			 diag.URL = '<%=basePath%>goods/goAdd.do';
+			 diag.Width = 600;
+			 diag.Height = 500;
+			 diag.CancelEvent = function(){ //关闭事件
+				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
+					 if('${page.currentPage}' == '0'){
+						 top.jzts();
+						 setTimeout("self.location.reload()",100);
+					 }else{
+						 nextPage(${page.currentPage});
+					 }
+				}
+				diag.close();
+			 };
+			 diag.show();
+		}
+		//新增属性
+		function addProperty(){
 			 top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
