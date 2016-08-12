@@ -29,7 +29,7 @@ public class SlorJTest {
 	public static void main(String[] args) throws Exception {
 		   SolrClient solr = new HttpSolrClient("http://200.0.0.210:8983/solr/goods_search");  
 	       Map<String, String> map = new HashMap<String, String>();  
-	       map.put("q", "name:1");  
+	       map.put("q", "title:路口");  
 	       SolrParams params = new MapSolrParams(map);  
 	       QueryResponse resp = solr.query(params);  
 	       //以下是第二种方法  

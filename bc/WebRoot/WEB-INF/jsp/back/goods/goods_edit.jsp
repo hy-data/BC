@@ -25,8 +25,8 @@
 		
 		<link rel="stylesheet" href="static/css/datepicker.css" /><!-- 日期框 -->
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
-		<script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="static/js/ajaxfileupload.js"></script>
+		<script type="text/javascript" src="static/js/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 			  <!-- 编辑器 -->
 		<script type="text/javascript" src="static/ckeditor/ckeditor.js"></script>
 		
@@ -337,7 +337,7 @@
 			<tr>
 				<td><input style="width:100px;margin-top:5px;" type="button" name="BRAND" id="BRAND" value="品牌" maxlength="32"  title="品牌" onclick = "addBrand();"/></td>
 			</tr>
-				<input type = "hidden" id = "BRAND_ID" />	
+				<input type = "hidden" id = "BRAND_ID" name = "BRAND_ID"/>	
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="PROMOTIONPRICE" id="PROMOTIONPRICE" value="${pd.PROMOTIONPRICE}" maxlength="32" placeholder="这里输入促销价格" title="促销价格"/></td>
 			</tr>

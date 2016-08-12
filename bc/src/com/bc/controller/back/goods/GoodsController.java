@@ -466,3 +466,13 @@ public class GoodsController extends BaseController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
 }
+
+
+
+
+
+
+
+
+
+
