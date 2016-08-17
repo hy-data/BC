@@ -85,7 +85,11 @@
 				a.TYPE,	
 				a.ID
 		from 
-				bc_lifecircle a
+				bc_lifecircle a where 1 = 1
+				<if test="pd.content!=null and pd.content!=''">
+				 and (a.name LIKE CONCAT(CONCAT('%', #{pd.content}),'%') or
+				      a.description LIKE CONCAT(CONCAT('%', #{pd.content}),'%'))
+			    </if>
 	</select>
 	
 	<!-- 批量删除 -->
