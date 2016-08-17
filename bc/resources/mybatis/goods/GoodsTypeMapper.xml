@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GoodsTypeMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd" useGeneratedKeys="true" keyProperty="id">
+		insert into bc_goods_type(
+			NAME,	
+			GOODS_GROUP,	
+			STATUS,	
+			PROPERTY_NUM
+		) values (
+			#{NAME},
+			#{GOODS_GROUP},	
+			#{STATUS},	
+			#{PROPERTY_NUM}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from bc_goods_type
+		where 
+			ID = #{ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  bc_goods_type
+			set 
+				NAME = #{NAME},
+				GOODS_GROUP = #{GOODS_GROUP},
+				STATUS = #{STATUS},
+				PROPERTY_NUM = #{PROPERTY_NUM},
+			ID = ID
+			where 
+				ID = #{ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			NAME,	
+			GOODS_GROUP,	
+			STATUS,	
+			PROPERTY_NUM,	
+			ID
+		from 
+			bc_goods_type
+		where 
+			ID = #{ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.NAME,	
+				a.GOODS_GROUP,	
+				a.STATUS,	
+				a.PROPERTY_NUM,	
+				a.ID
+		from 
+				bc_goods_type a where 1 = 1
+				<if test="pd.content!=null and pd.content!=''">
+				 and (a.name LIKE CONCAT(CONCAT('%', #{pd.content}),'%') or
+				      a.description LIKE CONCAT(CONCAT('%', #{pd.content}),'%'))
+			    </if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.NAME,	
+				a.GOODS_GROUP,	
+				a.STATUS,	
+				a.PROPERTY_NUM,	
+				a.ID
+		from 
+				bc_goods_type a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from bc_goods_type
+		where 
+			ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>
