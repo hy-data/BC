@@ -95,19 +95,40 @@
 		<div id="zhongxin">
 		<table>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="TYPE_ID" id="TYPE_ID" value="${pd.TYPE_ID}" maxlength="32" placeholder="这里输入所属商品类型" title="所属商品类型"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="OPTIONS_STATUS" id="OPTIONS_STATUS" value="${pd.OPTIONS_STATUS}" maxlength="32" placeholder="这里输入属性是否可选" title="属性是否可选"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="PLANT_STATUS" id="PLANT_STATUS" value="${pd.PLANT_STATUS}" maxlength="32" placeholder="这里输入录入方式" title="录入方式"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="VALUE_LIST" id="VALUE_LIST" value="${pd.VALUE_LIST}" maxlength="32" placeholder="这里输入属性列表值" title="属性列表值"/></td>
-			</tr>
-			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入属性名称" title="属性名称"/></td>
+			</tr>
+			<%-- <tr>
+				<td><input style="width:400px;margin-top:5px;" type="number" name="TYPE_ID" id="TYPE_ID" value="${pd.TYPE_ID}" maxlength="32" placeholder="这里输入所属商品类型" title="所属商品类型"/></td>
+			</tr> --%>
+			<tr>
+				<td >
+					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "TYPE_ID"  id="select_type">
+						
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "OPTIONS_STATUS"  id="select_type">
+						<option value = "0">唯一属性</option>
+						<option value = "1">单选属性</option>
+						<option value = "2">复选属性</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "PLANT_STATUS"  id="PLANT_STATUS">
+						<option value = "0">手工录入</option>
+						<option value = "1">下面的列表中选择</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>可选值列表：
+					<textarea id = "VALUE_LIST" name = "VALUE_LIST" style = "width:270px;height:112px;"></textarea>
+					注：多个可选值中间用“，”隔开
+				</td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">
@@ -133,16 +154,31 @@
 		<script type="text/javascript">
 		$(top.hangge());
 		$(function() {
-			
 			//单选框
 			$(".chzn-select").chosen(); 
 			$(".chzn-select-deselect").chosen({allow_single_deselect:true}); 
 			
 			//日期框
 			$('.date-picker').datepicker();
-			
+			//获取下拉列表
+			getJsonType();
 		});
-		
+		function getJsonType(){
+			$.ajax({
+                url: '<%=basePath%>goodstype/getJsonType.do',
+                async:false, 
+                dataType : "json",
+                success: function(data) {
+					var html = "";	
+                	if(data.list != null && data.list.length>0){
+                		for(var i=0;i<data.list.length;i++){
+                			html += "<option id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                		}
+                	}
+                	$("#select_type").html(html);
+                }
+			});
+		}
 		</script>
 </body>
 </html>

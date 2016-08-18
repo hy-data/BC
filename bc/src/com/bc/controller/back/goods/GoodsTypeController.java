@@ -106,12 +106,34 @@ public class GoodsTypeController extends BaseController {
 			List<PageData>	varList = goodstypeService.list(page);	//列出GoodsType列表
 			mv.setViewName("back/goods/type/goodstype_list");
 			mv.addObject("varList", varList);
+			mv.addObject("TYPE_ID", pd.getString("TYPE_ID"));
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){
 			logger.error(e.toString(), e);
 		}
 		return mv;
+	}
+	
+	/**
+	 * 获取类型下拉选项
+	 */
+	@RequestMapping(value = "/getJsonType")
+	@ResponseBody
+	public Object getJsonType() {
+		logBefore(logger, "获取getJsonType");
+		PageData pd = new PageData();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			pd = this.getPageData();
+			List<PageData> list = goodstypeService.listAll(pd);
+			map.put("list", list);
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		} finally {
+			logAfter(logger);
+		}
+		return JSONUtil.returnObject(new PageData(), map);
 	}
 	
 	/**

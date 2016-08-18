@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bc.controller.base.BaseController;
 import com.bc.entity.Page;
 import com.bc.service.back.goods.GoodsPropertyService;
+import com.bc.service.back.goods.GoodsTypeService;
 import com.bc.util.Const;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
@@ -41,6 +42,8 @@ public class GoodsPropertyController extends BaseController {
 	
 	@Resource(name="goodspropertyService")
 	private GoodsPropertyService goodspropertyService;
+	@Resource(name="goodstypeService")
+	private GoodsTypeService goodstypeService;
 	
 	/**
 	 * 新增
@@ -103,8 +106,10 @@ public class GoodsPropertyController extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = goodspropertyService.list(page);	//列出GoodsProperty列表
+			List<PageData>	varList1 = goodstypeService.list(page);	//列出GoodsType列表
 			mv.setViewName("back/goods/property/goodsproperty_list");
 			mv.addObject("varList", varList);
+			mv.addObject("varList1", varList1);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){

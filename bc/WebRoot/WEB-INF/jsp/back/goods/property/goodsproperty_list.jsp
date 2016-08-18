@@ -26,24 +26,22 @@
 			<form action="goodsproperty/list.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
-					<td>
-						<span class="input-icon">
-							<input autocomplete="off" id="nav-search-input" type="text" name="content" value="" placeholder="这里输入关键词" />
-							<i id="nav-search-icon" class="icon-search"></i>
-						</span>
-					</td>
 					<td style="vertical-align:top;"> 
-					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择所属类型" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
+					 	<select class="chzn-select" name="TYPE_ID" id="TYPE_ID" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+							<c:forEach items="${varList1}" var="sort" varStatus="status">
+								<c:if test="${pd.TYPE_ID== sort.ID}">
+									<option value="${sort.ID}" selected = "selected">${sort.NAME}</option>
+								</c:if>
+								<c:if test="${pd.TYPE_ID != sort.ID}">
+									<option value="${sort.ID}">${sort.NAME}</option>
+								</c:if>
+							</c:forEach>
 					  	</select>
 					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
 				</tr>
 			</table>
 			<!-- 检索  -->
-		
-		
 			<table id="table_report" class="table table-striped table-bordered table-hover">
 				
 				<thead>
@@ -74,9 +72,29 @@
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
 										<td>${var.NAME}</td>
-										<td>${var.TYPE_ID}</td>
-										<td>${var.OPTIONS_STATUS}</td>
-										<td>${var.PLANT_STATUS}</td>
+										<td>${var.TYPE_NAME}</td>
+										<td>
+											<c:if test="${var.OPTIONS_STATUS == 0}">	
+												唯一属性 
+											</c:if>								
+											<c:if test="${var.OPTIONS_STATUS == 1}">	
+												单选属性
+											</c:if>			
+											<c:if test="${var.OPTIONS_STATUS == 2}">	
+												复选属性
+											</c:if>			
+										</td>
+										<td>
+											<c:if test="${var.PLANT_STATUS == 0}">	
+												手工录入 
+											</c:if>	
+											<c:if test="${var.PLANT_STATUS == 1}">	
+												从下面的列表中选择 
+											</c:if>	
+											<c:if test="${var.PLANT_STATUS == 2}">	
+												多行文本框 
+											</c:if>	
+										</td>
 										<td>${var.VALUE_LIST}</td>
 										
 								<td style="width: 30px;" class="center">

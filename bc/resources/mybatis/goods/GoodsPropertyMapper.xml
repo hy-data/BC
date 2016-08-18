@@ -62,15 +62,20 @@
 	
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
-		select
-				a.TYPE_ID,	
-				a.OPTIONS_STATUS,	
-				a.PLANT_STATUS,	
-				a.VALUE_LIST,	
-				a.NAME,	
-				a.ID
-		from 
-				bc_goods_property a
+		SELECT 
+		  b.`ID`,
+		  b.`NAME`,
+		  b.`TYPE_ID`,
+		  a.`name` TYPE_NAME,
+		  b.`OPTIONS_STATUS`,
+		  b.`PLANT_STATUS`,
+		  b.`VALUE_LIST`
+		FROM
+		  bc_goods_type a, bc_goods_property b 
+		WHERE a.`id` = b.`type_id`
+		<if test="pd.TYPE_ID!=null and pd.TYPE_ID!=''">
+		AND b.`type_id` = #{pd.TYPE_ID}
+		</if>
 	</select>
 	
 	<!-- 列表(全部) -->
