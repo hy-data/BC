@@ -8,11 +8,13 @@
 		insert into bc_site(
 			NAME,	
 			INTRO,	
-			DESCRIPTION
+			DESCRIPTION,
+			UPDATE_TIME
 		) values (
 			#{NAME},	
 			#{INTRO},	
-			#{DESCRIPTION}
+			#{DESCRIPTION},
+			#{UPDATE_TIME}
 		)
 	</insert>
 	
@@ -33,6 +35,7 @@
 				NAME = #{NAME},
 				INTRO = #{INTRO},
 				DESCRIPTION = #{DESCRIPTION},
+				UPDATE_TIME = #{UPDATE_TIME},
 			ID = ID
 			where 
 				ID = #{ID}

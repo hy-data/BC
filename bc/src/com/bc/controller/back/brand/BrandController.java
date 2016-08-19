@@ -75,6 +75,7 @@ public class BrandController extends BaseController {
 		pd.put("DESCRIPTION", DESCRIPTION);
 		pd.put("IS_SHOW", Integer.parseInt(IS_SHOW));
 		pd.put("SORT", Integer.parseInt(SORT));
+		pd.put("UPDATE_TIME", DateUtil.getTime());
 		brandService.save(pd);
 		mv.addObject("msg", "success");
 		mv.setViewName("save_result");
@@ -127,6 +128,7 @@ public class BrandController extends BaseController {
 		pd.put("DESCRIPTION", DESCRIPTION);
 		pd.put("IS_SHOW", Integer.parseInt(IS_SHOW));
 		pd.put("SORT", Integer.parseInt(SORT));
+		pd.put("UPDATE_TIME", DateUtil.getTime());
 		brandService.edit(pd);
 		mv.addObject("msg", "success");
 		mv.setViewName("save_result");

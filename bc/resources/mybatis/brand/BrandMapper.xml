@@ -11,7 +11,8 @@
 			LOGO_IMAGE,	
 			DESCRIPTION,	
 			SORT,	
-			IS_SHOW,	
+			IS_SHOW,
+			UPDATE_TIME,	
 			ID
 		) values (
 			#{NAME},	
@@ -20,6 +21,7 @@
 			#{DESCRIPTION},	
 			#{SORT},	
 			#{IS_SHOW},	
+			#{UPDATE_TIME},
 			#{ID}
 		)
 	</insert>
@@ -42,6 +44,7 @@
 				LOGO_IMAGE = #{LOGO_IMAGE},
 				DESCRIPTION = #{DESCRIPTION},
 				IS_SHOW = #{IS_SHOW},
+				UPDATE_TIME = #{UPDATE_TIME},
 			ID = ID
 			where 
 				ID = #{ID}

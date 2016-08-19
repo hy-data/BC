@@ -10,13 +10,15 @@
 			OPTIONS_STATUS,	
 			PLANT_STATUS,	
 			VALUE_LIST,	
-			NAME
+			NAME,
+			UPDATE_TIME
 		) values (
 			#{TYPE_ID},	
 			#{OPTIONS_STATUS},	
 			#{PLANT_STATUS},	
 			#{VALUE_LIST},	
-			#{NAME}	
+			#{NAME},
+			${UPDATE_TIME}
 		)
 	</insert>
 	
@@ -38,6 +40,7 @@
 				PLANT_STATUS = #{PLANT_STATUS},
 				VALUE_LIST = #{VALUE_LIST},
 				NAME = #{NAME},
+				UPDATE_TIME = #{UPDATE_TIME},
 			ID = ID
 			where 
 				ID = #{ID}

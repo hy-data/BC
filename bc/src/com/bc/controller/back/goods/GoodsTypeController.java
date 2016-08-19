@@ -26,6 +26,7 @@ import com.bc.controller.base.BaseController;
 import com.bc.entity.Page;
 import com.bc.service.back.goods.GoodsTypeService;
 import com.bc.util.Const;
+import com.bc.util.DateUtil;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
 import com.bc.util.PageData;
@@ -53,6 +54,7 @@ public class GoodsTypeController extends BaseController {
 		pd = this.getPageData();
 		pd.put("STATUS", Integer.parseInt(pd.getString("STATUS")));
 		pd.put("PROPERTY_NUM", Integer.parseInt(pd.getString("PROPERTY_NUM")));
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		goodstypeService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -86,6 +88,7 @@ public class GoodsTypeController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		goodstypeService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");

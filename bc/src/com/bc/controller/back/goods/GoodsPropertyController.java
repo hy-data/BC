@@ -27,6 +27,7 @@ import com.bc.entity.Page;
 import com.bc.service.back.goods.GoodsPropertyService;
 import com.bc.service.back.goods.GoodsTypeService;
 import com.bc.util.Const;
+import com.bc.util.DateUtil;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
 import com.bc.util.PageData;
@@ -54,7 +55,7 @@ public class GoodsPropertyController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("GOODSPROPERTY_ID", this.get32UUID());	//主键
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		goodspropertyService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -88,6 +89,7 @@ public class GoodsPropertyController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		goodspropertyService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");

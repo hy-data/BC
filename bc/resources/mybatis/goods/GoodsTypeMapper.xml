@@ -9,12 +9,14 @@
 			NAME,	
 			GOODS_GROUP,	
 			STATUS,	
-			PROPERTY_NUM
+			PROPERTY_NUM,
+			UPDATE_TIME
 		) values (
 			#{NAME},
 			#{GOODS_GROUP},	
 			#{STATUS},	
-			#{PROPERTY_NUM}
+			#{PROPERTY_NUM}，
+			#{UPDATE_TIME}
 		)
 	</insert>
 	
@@ -35,6 +37,7 @@
 				GOODS_GROUP = #{GOODS_GROUP},
 				STATUS = #{STATUS},
 				PROPERTY_NUM = #{PROPERTY_NUM},
+				UPDATE_TIME = #{UPDATE_TIME},
 			ID = ID
 			where 
 				ID = #{ID}

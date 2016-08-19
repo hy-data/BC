@@ -26,6 +26,7 @@ import com.bc.controller.base.BaseController;
 import com.bc.entity.Page;
 import com.bc.service.back.site.SiteService;
 import com.bc.util.Const;
+import com.bc.util.DateUtil;
 import com.bc.util.JSONUtil;
 import com.bc.util.ObjectExcelView;
 import com.bc.util.PageData;
@@ -51,7 +52,7 @@ public class SiteController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("SITE_ID", this.get32UUID());	//主键
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		siteService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -85,6 +86,7 @@ public class SiteController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		siteService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");

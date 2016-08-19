@@ -10,14 +10,16 @@
 			NAME,	
 			INTRO,	
 			DESCRIPTION,	
-			TYPE,	
+			TYPE,
+			UPDATE_TIME,	
 			ID
 		) values (
 			#{SITEID},	
 			#{NAME},	
 			#{INTRO},	
 			#{DESCRIPTION},	
-			#{TYPE},	
+			#{TYPE},
+			#{UPDATE_TIME},	
 			#{ID}
 		)
 	</insert>
@@ -40,6 +42,7 @@
 				INTRO = #{INTRO},
 				DESCRIPTION = #{DESCRIPTION},
 				TYPE = #{TYPE},
+				UPDATE_TIME = #{UPDATE_TIME},
 			ID = ID
 			where 
 				ID = #{ID}
