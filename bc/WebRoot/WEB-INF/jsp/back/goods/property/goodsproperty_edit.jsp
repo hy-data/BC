@@ -168,7 +168,6 @@
 		});
 		function getJsonType(){
 			var TYPE_ID = $("#TYPE_ID").val();
-			alert(TYPE_ID);
 			$.ajax({
                 url: '<%=basePath%>goodstype/getJsonType.do',
                 async:false, 
