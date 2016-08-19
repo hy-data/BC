@@ -117,7 +117,7 @@ public class ${objectName}Controller extends BaseController {
 			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = ${objectNameLower}Service.list(page);	//列出${objectName}列表
-			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_list");
+			mv.setViewName("back/${objectNameLower}/${objectNameLower}_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
