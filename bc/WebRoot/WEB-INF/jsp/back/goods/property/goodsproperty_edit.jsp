@@ -90,8 +90,12 @@
 </script>
 	</head>
 <body>
+		
 	<form action="goodsproperty/${msg }.do" name="Form" id="Form" method="post">
 		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
+		<input type="hidden"  id="TYPE_ID" value="${pd.TYPE_ID}"/>
+		<input type="hidden"  id="OPTIONS_STATUS" value="${pd.OPTIONS_STATUS}"/>
+		<input type="hidden"  id="PLANT_STATUS" value="${pd.PLANT_STATUS}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
@@ -109,24 +113,21 @@
 			</tr>
 			<tr>
 				<td >
-					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "OPTIONS_STATUS"  id="select_type">
-						<option value = "0">唯一属性</option>
-						<option value = "1">单选属性</option>
-						<option value = "2">复选属性</option>
+					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "OPTIONS_STATUS" id = "options_status" >
+						
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "PLANT_STATUS"  id="PLANT_STATUS">
-						<option value = "0">手工录入</option>
-						<option value = "1">下面的列表中选择</option>
+					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "PLANT_STATUS" id = "plant_status">
+						
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<td>可选值列表：
-					<textarea id = "VALUE_LIST" name = "VALUE_LIST" style = "width:270px;height:112px;"></textarea>
+					<textarea id = "VALUE_LIST" name = "VALUE_LIST" style = "width:270px;height:112px;">${pd.VALUE_LIST}</textarea>
 					注：多个可选值中间用“，”隔开
 				</td>
 			</tr>
@@ -162,8 +163,12 @@
 			$('.date-picker').datepicker();
 			//获取下拉列表
 			getJsonType();
+			options_status();
+			plant_status();
 		});
 		function getJsonType(){
+			var TYPE_ID = $("#TYPE_ID").val();
+			alert(TYPE_ID);
 			$.ajax({
                 url: '<%=basePath%>goodstype/getJsonType.do',
                 async:false, 
@@ -172,12 +177,48 @@
 					var html = "";	
                 	if(data.list != null && data.list.length>0){
                 		for(var i=0;i<data.list.length;i++){
-                			html += "<option id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                			if(TYPE_ID != null){
+                				if(TYPE_ID == data.list[i].ID){
+                					html += "<option selected = \"selected\" id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                				}else{
+                					html += "<option id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                				}
+                			}
                 		}
                 	}
                 	$("#select_type").html(html);
                 }
 			});
+		}
+		function options_status(){
+			var html = "";
+			var OPTIONS_STATUS = $("#OPTIONS_STATUS").val();
+			if(OPTIONS_STATUS == 0|| OPTIONS_STATUS == ""){
+				html += "<option value = \"0\" selected = \"selected\">唯一属性</option>";
+				html += "<option value = \"1\" >单选属性</option>";
+				html += "<option value = \"2\" >复选属性</option>";
+			}else if(OPTIONS_STATUS == 1){
+				html += "<option value = \"0\" >唯一属性</option>";
+				html += "<option value = \"1\" selected = \"selected\">单选属性</option>";
+				html += "<option value = \"2\" >复选属性</option>";
+			}else if(OPTIONS_STATUS == 2){
+				html += "<option value = \"0\" >唯一属性</option>";
+				html += "<option value = \"1\" >单选属性</option>";
+				html += "<option value = \"2\" selected = \"selected\">复选属性</option>";
+			}
+			$("#options_status").html(html);
+		}
+		function plant_status(){
+			var html = "";
+			var PLANT_STATUS = $("#PLANT_STATUS").val();
+			if(PLANT_STATUS == 0 || PLANT_STATUS == ""){
+				html += "<option value = \"0\" selected = \"selected\">手工录入</option>";
+				html += "<option value = \"1\" >下面的列表中选择</option>";
+			}else {
+				html += "<option value = \"0\" >手工录入</option>";
+				html += "<option value = \"1\" selected = \"selected\" >下面的列表中选择</option>";
+			}
+			$("#plant_status").html(html);
 		}
 		</script>
 </body>
