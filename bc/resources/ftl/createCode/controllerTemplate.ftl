@@ -55,7 +55,7 @@ public class ${objectName}Controller extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("${objectNameUpper}_ID", this.get32UUID());	//主键
+		pd.put("UPDATE_TIME", DateUtil.getTimes());		
 <#list fieldList as var>
 	<#if var[3] == "否">
 		<#if var[1] == 'Date'>
@@ -98,6 +98,7 @@ public class ${objectName}Controller extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("UPDATE_TIME", DateUtil.getTimes());
 		${objectNameLower}Service.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
