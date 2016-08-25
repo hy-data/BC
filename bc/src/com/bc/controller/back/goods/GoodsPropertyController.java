@@ -121,6 +121,27 @@ public class GoodsPropertyController extends BaseController {
 	}
 	
 	/**
+	 * 获取类型下拉选项
+	 */
+	@RequestMapping(value = "/getJsonProperty")
+	@ResponseBody
+	public Object getJsonProperty() {
+		logBefore(logger, "获取getJsonProperty");
+		PageData pd = new PageData();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			pd = this.getPageData();
+			List<PageData> list = goodspropertyService.listAll(pd);
+			map.put("list", list);
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		} finally {
+			logAfter(logger);
+		}
+		return JSONUtil.returnObject(new PageData(), map);
+	}
+	
+	/**
 	 * 去新增页面
 	 */
 	@RequestMapping(value="/goAdd")

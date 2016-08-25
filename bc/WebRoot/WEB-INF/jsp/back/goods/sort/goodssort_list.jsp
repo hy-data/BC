@@ -32,18 +32,7 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
-					<td style="vertical-align:top;"> 
-					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
-					  	</select>
-					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
-					<c:if test="${QX.cha == 1 }">
-					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
-					</c:if>
 				</tr>
 			</table>
 			<!-- 检索  -->
@@ -58,19 +47,13 @@
 						</th>
 						<th>序号</th>
 						<th>分类名称</th>
-						<th>父级分类id</th>
-						<th>父级分类名称</th>
+						<th>上级分类</th>
 						<th>是否显示</th>
 						<th>关键字</th>
 						<th>分类描述</th>
-						<th>商品类型ids</th>
-						<th>商品属性ids</th>
 						<th>导航栏</th>
 						<th>排序</th>
-						<th>数量单位</th>
 						<th>首页推荐</th>
-						<th>价格区间个数</th>
-						<th>状态，预留字段</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -84,23 +67,26 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.GOODSSORT_ID}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${var.ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
 										<td>${var.NAME}</td>
-										<td>${var.PARENT_ID}</td>
 										<td>${var.PARENT_NAME}</td>
-										<td>${var.IS_SHOW}</td>
+										<td>
+											<c:if test="${var.IS_SHOW==0}">是</c:if>
+											<c:if test="${var.IS_SHOW==1}">否</c:if>
+										</td>
 										<td>${var.KEY_WORDS}</td>
 										<td>${var.SORT_DESCRIPTION}</td>
-										<td>${var.TYPE_IDS}</td>
-										<td>${var.PROPERTY_IDS}</td>
-										<td>${var.NAVIGATION}</td>
+										<td>
+											<c:if test="${var.NAVIGATION==0}">是</c:if>
+											<c:if test="${var.NAVIGATION==1}">否</c:if>
+										</td>
 										<td>${var.SORT}</td>
-										<td>${var.NUMBER_UNIT}</td>
-										<td>${var.HOME_RECOMMEND}</td>
-										<td>${var.NUM_PRICE}</td>
-										<td>${var.STATUS}</td>
+										<td>
+											<c:if test="${var.HOME_RECOMMEND==0}">是</c:if>
+											<c:if test="${var.HOME_RECOMMEND==1}">否</c:if>
+										</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -111,10 +97,10 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.GOODSSORT_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.GOODSSORT_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 											</c:if>
 										</ul>
 										</div>
@@ -222,7 +208,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>goodssort/delete.do?GOODSSORT_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>goodssort/delete.do?ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -236,7 +222,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>goodssort/goEdit.do?GOODSSORT_ID='+Id;
+			 diag.URL = '<%=basePath%>goodssort/goEdit.do?ID='+Id;
 			 diag.Width = 600;
 			 diag.Height = 500;
 			 diag.CancelEvent = function(){ //关闭事件

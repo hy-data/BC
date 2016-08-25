@@ -32,46 +32,6 @@
 	
 	//保存
 	function save(){
-			if($("#TYPE_ID").val()==""){
-			$("#TYPE_ID").tips({
-				side:3,
-	            msg:'请输入所属商品类型',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TYPE_ID").focus();
-			return false;
-		}
-		if($("#OPTIONS_STATUS").val()==""){
-			$("#OPTIONS_STATUS").tips({
-				side:3,
-	            msg:'请输入属性是否可选',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#OPTIONS_STATUS").focus();
-			return false;
-		}
-		if($("#PLANT_STATUS").val()==""){
-			$("#PLANT_STATUS").tips({
-				side:3,
-	            msg:'请输入录入方式',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PLANT_STATUS").focus();
-			return false;
-		}
-		if($("#VALUE_LIST").val()==""){
-			$("#VALUE_LIST").tips({
-				side:3,
-	            msg:'请输入属性列表值',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#VALUE_LIST").focus();
-			return false;
-		}
 		if($("#NAME").val()==""){
 			$("#NAME").tips({
 				side:3,

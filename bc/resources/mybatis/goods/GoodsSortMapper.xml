@@ -8,7 +8,6 @@
 		insert into bc_goods_sort(
 			NAME,	
 			PARENT_ID,	
-			PARENT_NAME,	
 			IS_SHOW,	
 			KEY_WORDS,	
 			SORT_DESCRIPTION,	
@@ -20,12 +19,10 @@
 			HOME_RECOMMEND,	
 			NUM_PRICE,	
 			STATUS,	
-			ID,
 			UPDATE_TIME
 		) values (
 			#{NAME},	
 			#{PARENT_ID},	
-			#{PARENT_NAME},	
 			#{IS_SHOW},	
 			#{KEY_WORDS},	
 			#{SORT_DESCRIPTION},	
@@ -37,7 +34,6 @@
 			#{HOME_RECOMMEND},	
 			#{NUM_PRICE},	
 			#{STATUS},	
-			#{ID},
 			#{UPDATE_TIME}
 		)
 	</insert>
@@ -57,7 +53,6 @@
 			set 
 				NAME = #{NAME},
 				PARENT_ID = #{PARENT_ID},
-				PARENT_NAME = #{PARENT_NAME},
 				IS_SHOW = #{IS_SHOW},
 				KEY_WORDS = #{KEY_WORDS},
 				SORT_DESCRIPTION = #{SORT_DESCRIPTION},
@@ -81,7 +76,6 @@
 		select 
 			NAME,	
 			PARENT_ID,	
-			PARENT_NAME,	
 			IS_SHOW,	
 			KEY_WORDS,	
 			SORT_DESCRIPTION,	
@@ -106,7 +100,6 @@
 		select
 				a.NAME,	
 				a.PARENT_ID,	
-				a.PARENT_NAME,	
 				a.IS_SHOW,	
 				a.KEY_WORDS,	
 				a.SORT_DESCRIPTION,	
@@ -128,7 +121,6 @@
 		select
 				a.NAME,	
 				a.PARENT_ID,	
-				a.PARENT_NAME,	
 				a.IS_SHOW,	
 				a.KEY_WORDS,	
 				a.SORT_DESCRIPTION,	
@@ -140,9 +132,17 @@
 				a.HOME_RECOMMEND,	
 				a.NUM_PRICE,	
 				a.STATUS,	
-				a.ID
+				a.ID 
 		from 
-				bc_goods_sort a
+				bc_goods_sort a where 1=1 
+				<if test="NAME!= null and NAME != ''"><!--根据分类名称检索 -->
+					and a.NAME like #{NAME} 
+				</if>
+				<if test="PARENT_ID!= null and PARENT_ID != ''"><!--根据上级分类检索 -->
+					and a.PARENT_ID = #{PARENT_ID} 
+				</if>
+				order by a.sort
+				
 	</select>
 	
 	<!-- 批量删除 -->

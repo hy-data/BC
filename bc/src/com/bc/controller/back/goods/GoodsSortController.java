@@ -124,13 +124,17 @@ public class GoodsSortController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
+		pd.put("PARENT_ID", "0");
+		List<PageData> sortList = new ArrayList<PageData>();
 		try {
+			sortList = goodssortService.getTree(pd);// 查询全部艺术品分类列表
 			mv.setViewName("back/goods/sort/goodssort_edit");
+			mv.addObject("sortList", sortList);
 			mv.addObject("msg", "save");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
-		}						
+		}
 		return mv;
 	}	
 	
@@ -145,7 +149,7 @@ public class GoodsSortController extends BaseController {
 		pd = this.getPageData();
 		try {
 			pd = goodssortService.findById(pd);	//根据ID读取
-			mv.setViewName("back/goodssort/goodssort_edit");
+			mv.setViewName("back/goods/sort/goodssort_edit");
 			mv.addObject("msg", "edit");
 			mv.addObject("pd", pd);
 		} catch (Exception e) {

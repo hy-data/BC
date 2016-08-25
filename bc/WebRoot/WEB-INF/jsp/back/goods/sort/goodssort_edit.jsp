@@ -30,7 +30,7 @@
 <script type="text/javascript">
 	
 	
-	//保存
+		//保存
 	function save(){
 			if($("#NAME").val()==""){
 			$("#NAME").tips({
@@ -40,36 +40,6 @@
 	            time:2
 	        });
 			$("#NAME").focus();
-			return false;
-		}
-		if($("#PARENT_ID").val()==""){
-			$("#PARENT_ID").tips({
-				side:3,
-	            msg:'请输入父级分类id',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PARENT_ID").focus();
-			return false;
-		}
-		if($("#PARENT_NAME").val()==""){
-			$("#PARENT_NAME").tips({
-				side:3,
-	            msg:'请输入父级分类名称',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PARENT_NAME").focus();
-			return false;
-		}
-		if($("#IS_SHOW").val()==""){
-			$("#IS_SHOW").tips({
-				side:3,
-	            msg:'请输入是否显示',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#IS_SHOW").focus();
 			return false;
 		}
 		if($("#KEY_WORDS").val()==""){
@@ -92,36 +62,6 @@
 			$("#SORT_DESCRIPTION").focus();
 			return false;
 		}
-		if($("#TYPE_IDS").val()==""){
-			$("#TYPE_IDS").tips({
-				side:3,
-	            msg:'请输入商品类型ids',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TYPE_IDS").focus();
-			return false;
-		}
-		if($("#PROPERTY_IDS").val()==""){
-			$("#PROPERTY_IDS").tips({
-				side:3,
-	            msg:'请输入商品属性ids',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PROPERTY_IDS").focus();
-			return false;
-		}
-		if($("#NAVIGATION").val()==""){
-			$("#NAVIGATION").tips({
-				side:3,
-	            msg:'请输入导航栏',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#NAVIGATION").focus();
-			return false;
-		}
 		if($("#SORT").val()==""){
 			$("#SORT").tips({
 				side:3,
@@ -142,16 +82,6 @@
 			$("#NUMBER_UNIT").focus();
 			return false;
 		}
-		if($("#HOME_RECOMMEND").val()==""){
-			$("#HOME_RECOMMEND").tips({
-				side:3,
-	            msg:'请输入首页推荐',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#HOME_RECOMMEND").focus();
-			return false;
-		}
 		if($("#NUM_PRICE").val()==""){
 			$("#NUM_PRICE").tips({
 				side:3,
@@ -162,40 +92,77 @@
 			$("#NUM_PRICE").focus();
 			return false;
 		}
-		if($("#STATUS").val()==""){
-			$("#STATUS").tips({
-				side:3,
-	            msg:'请输入状态，预留字段',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#STATUS").focus();
-			return false;
+		var type_ids = "";
+		var property_ids = "";
+		for(var i = 1; i <= x; i ++){
+			var html = $("#td_id" + i).html();
+			if(html != ""){
+				type_ids += $("#select_type" + i).val() + ",";
+				property_ids += $("#select_property" + i).val() + ",";
+			}
 		}
+		$("#TYPE_IDS").val(type_ids.substring(0, type_ids.length - 1));
+		$("#PROPERTY_IDS").val(property_ids.substring(0, property_ids.length - 1));
 		$("#Form").submit();
 		$("#zhongxin").hide();
 		$("#zhongxin2").show();
 	}
+		
 	
 </script>
 	</head>
 <body>
 	<form action="goodssort/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="GOODSSORT_ID" id="GOODSSORT_ID" value="${pd.GOODSSORT_ID}"/>
+		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
 		<table>
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入分类名称" title="分类名称"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="PARENT_ID" id="PARENT_ID" value="${pd.PARENT_ID}" maxlength="32" placeholder="这里输入父级分类id" title="父级分类id"/></td>
+				<td>上级分类：
+					<select name="PARENT_ID"   id="PARENT_ID" data-placeholder="请选择上级分类" >
+					<option value="0" >顶级分类</option>
+						<c:forEach items="${sortList}" var="sort" varStatus="status">
+							<option value="${sort.ID}" <c:if test="${sort.ID==pd.PARENT_ID}">selected="selected"</c:if>>${sort.NAME}</option>
+						    <c:forEach items="${sort.child}" var="child">
+								<option value="${child.ID}" <c:if test="${child.ID==pd.PARENT_ID}">selected="selected"</c:if>>&nbsp;&nbsp;&nbsp;${child.NAME}</option>
+							</c:forEach>
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="PARENT_NAME" id="PARENT_NAME" value="${pd.PARENT_NAME}" maxlength="32" placeholder="这里输入父级分类名称" title="父级分类名称"/></td>
+				<td>是否显示： 
+					<select  name="IS_SHOW" id="IS_SHOW"  data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+						<option value="0" <c:if test="${pd.IS_SHOW=='0'}"> selected="selected"</c:if>>显示</option>
+						<option value="1" <c:if test="${pd.IS_SHOW=='1'}"> selected="selected"</c:if>>不显示</option>
+				  	</select>
+				</td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="IS_SHOW" id="IS_SHOW" value="${pd.IS_SHOW}" maxlength="32" placeholder="这里输入是否显示" title="是否显示"/></td>
+				<td>导航栏显示： 	
+					<select  name="NAVIGATION" id="NAVIGATION"  data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+						<option value="0" <c:if test="${pd.NAVIGATION=='0'}"> selected="selected"</c:if>>显示</option>
+						<option value="1" <c:if test="${pd.NAVIGATION=='1'}"> selected="selected"</c:if>>不是显示</option>
+				  	</select>
+				</td>
 			</tr>
+			<tr>
+				<td>首页推荐： 
+					<select  name="HOME_RECOMMEND" id="HOME_RECOMMEND"  data-placeholder="请选择" style="vertical-align:top;width: 120px;">
+						<option value="0" <c:if test="${pd.HOME_RECOMMEND=='0'}"> selected="selected"</c:if>>推荐</option>
+						<option value="1" <c:if test="${pd.HOME_RECOMMEND=='1'}"> selected="selected"</c:if>>不推荐</option>
+				  	</select>
+				</td>
+			</tr>
+			<input style="width:400px;margin-top:5px;" type="hidden" name="TYPE_IDS" id="TYPE_IDS" value="${pd.TYPE_IDS}" maxlength="32" placeholder="这里输入商品类型ids" title="商品类型ids"/>
+			<input style="width:400px;margin-top:5px;" type="hidden" name="PROPERTY_IDS" id="PROPERTY_IDS" value="${pd.PROPERTY_IDS}" maxlength="32" placeholder="这里输入商品属性ids" title="商品属性ids"/>
+			<!-- <tr id = "add_item">	
+				<td>
+				
+				</td>
+			</tr> -->
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="KEY_WORDS" id="KEY_WORDS" value="${pd.KEY_WORDS}" maxlength="32" placeholder="这里输入关键字" title="关键字"/></td>
 			</tr>
@@ -203,28 +170,14 @@
 				<td><input style="width:400px;margin-top:5px;" type="text" name="SORT_DESCRIPTION" id="SORT_DESCRIPTION" value="${pd.SORT_DESCRIPTION}" maxlength="32" placeholder="这里输入分类描述" title="分类描述"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="TYPE_IDS" id="TYPE_IDS" value="${pd.TYPE_IDS}" maxlength="32" placeholder="这里输入商品类型ids" title="商品类型ids"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="PROPERTY_IDS" id="PROPERTY_IDS" value="${pd.PROPERTY_IDS}" maxlength="32" placeholder="这里输入商品属性ids" title="商品属性ids"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="NAVIGATION" id="NAVIGATION" value="${pd.NAVIGATION}" maxlength="32" placeholder="这里输入导航栏" title="导航栏"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="SORT" id="SORT" value="${pd.SORT}" maxlength="32" placeholder="这里输入排序" title="排序"/></td>
-			</tr>
-			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="NUMBER_UNIT" id="NUMBER_UNIT" value="${pd.NUMBER_UNIT}" maxlength="32" placeholder="这里输入数量单位" title="数量单位"/></td>
 			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="HOME_RECOMMEND" id="HOME_RECOMMEND" value="${pd.HOME_RECOMMEND}" maxlength="32" placeholder="这里输入首页推荐" title="首页推荐"/></td>
-			</tr>
+			
 			<tr>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="NUM_PRICE" id="NUM_PRICE" value="${pd.NUM_PRICE}" maxlength="32" placeholder="这里输入价格区间个数" title="价格区间个数"/></td>
 			</tr>
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="STATUS" id="STATUS" value="${pd.STATUS}" maxlength="32" placeholder="这里输入状态，预留字段" title="状态，预留字段"/></td>
+				<td><input style="width:400px;margin-top:5px;" type="number" name="SORT" id="SORT" value="${pd.SORT}" maxlength="32" placeholder="这里输入排序" title="排序"/></td>
 			</tr>
 			<tr>
 				<td style="text-align: center;">
@@ -257,9 +210,70 @@
 			
 			//日期框
 			$('.date-picker').datepicker();
+			getselectmes(1);
 			
 		});
-		
+		var x = 1; 
+		function additem(){
+			x ++;
+			getselectmes(x);
+		}
+		function minitme(d){
+			$(d).parent().parent().remove();
+		}
+		function getselectmes(j){
+			var html = "";
+			html += "<tr id = \"td_id"+ j +"\">";
+			html += "<td>";
+			html += "<div >";
+			html += "<select  data-placeholder=\"请选择商品类型\" style=\"vertical-align:top;width: 120px;\" name = \"select_type"+j+"\"  id=\"select_type"+j+"\">";
+			html += "</select>";
+			html += "<select  data-placeholder=\"请选择商品属性\" style=\"vertical-align:top;width: 120px;\" name = \"select_property"+j+"\" id=\"select_property"+j+"\">";
+			html += "	<option>请选择</option>";
+			html += "</select>";
+			if(j == 1)
+				html += "<input type = \"button\" value = \"+\" onclick = \"additem();\"> <input type = \"button\" value = \"-\" onclick = \"minitme(this);\"/><br/>";
+			else
+				html += "<input type = \"button\" value = \"-\" onclick = \"minitme(this);\"/><br/>";
+			html += "</div>";
+			html += "</td>";
+			html += "</tr>";
+			$(html).insertAfter("#PROPERTY_IDS");
+			getJsonType(j);
+			x = j;
+		}
+		function getJsonType(j){
+			$.ajax({
+                url: '<%=basePath%>goodstype/getJsonType.do',
+                async:false, 
+                dataType : "json",
+                success: function(data) {
+					var html = "<option>请选择商品类型</option>";	
+                	if(data.list != null && data.list.length>0){
+                		for(var i=0;i<data.list.length;i++){
+           					html += "<option  id = \""+ data.list[i].ID +"\" onclick = \"getProperty("+ j +", "+ data.list[i].ID +");\" value = \""+ data.list[i].ID +"\" >"+ data.list[i].NAME +"</option>";			
+                		}
+                	}
+                	$("#select_type" + j).html(html);
+                }
+			});
+		}
+		function getProperty(y, id){
+			$.ajax({
+                url: '<%=basePath%>goodsproperty/getJsonProperty.do?TYPE_ID=' + id,
+                async:false, 
+                dataType : "json",
+                success: function(data) {
+                	var html = "<option>请选择商品属性</option>";	
+                	if(data.list != null && data.list.length>0){
+               			for(var i=0;i<data.list.length;i++){
+              				html += "<option  id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                   		}
+                	}
+                	$("#select_property" + y).html(html);
+                }
+			});
+		}
 		</script>
 </body>
 </html>
