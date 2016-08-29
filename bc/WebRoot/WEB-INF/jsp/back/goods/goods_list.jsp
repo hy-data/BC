@@ -226,7 +226,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>goods/goAdd.do';
+			 diag.URL = '<%=basePath%>goods/goAddProperty.do';
 			 diag.Width = 600;
 			 diag.Height = 500;
 			 diag.CancelEvent = function(){ //关闭事件

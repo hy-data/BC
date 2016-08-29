@@ -261,6 +261,24 @@ public class GoodsController extends BaseController {
 		}						
 		return mv;
 	}	
+	/**
+	 * 去属性页面
+	 */
+	@RequestMapping(value="/goAddProperty")
+	public ModelAndView goAddProperty(){
+		logBefore(logger, "去新增Goods页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		try {
+			mv.setViewName("back/goods/goods_property");
+			mv.addObject("msg", "save");
+			mv.addObject("pd", pd);
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}						
+		return mv;
+	}	
 	
 	/**
 	 * 去修改页面

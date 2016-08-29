@@ -32,256 +32,6 @@
 	
 	//保存
 	function save(){
-			if($("#SID").val()==""){
-			$("#SID").tips({
-				side:3,
-	            msg:'请输入商店',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#SID").focus();
-			return false;
-		}
-		if($("#NAME").val()==""){
-			$("#NAME").tips({
-				side:3,
-	            msg:'请输入商品名称',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#NAME").focus();
-			return false;
-		}
-		if($("#TYPE").val()==""){
-			$("#TYPE").tips({
-				side:3,
-	            msg:'请输入商品主类型',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TYPE").focus();
-			return false;
-		}
-		if($("#CODE").val()==""){
-			$("#CODE").tips({
-				side:3,
-	            msg:'请输入商品货号',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#CODE").focus();
-			return false;
-		}
-		if($("#KEYSWORK").val()==""){
-			$("#KEYSWORK").tips({
-				side:3,
-	            msg:'请输入商品关键字',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#KEYSWORK").focus();
-			return false;
-		}
-		if($("#TITLE").val()==""){
-			$("#TITLE").tips({
-				side:3,
-	            msg:'请输入商品简单描述',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TITLE").focus();
-			return false;
-		}
-		if($("#PICTUREURL").val()==""){
-			$("#PICTUREURL").tips({
-				side:3,
-	            msg:'请输入主图片地址',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PICTUREURL").focus();
-			return false;
-		}
-		if($("#PRICE").val()==""){
-			$("#PRICE").tips({
-				side:3,
-	            msg:'请输入商品原始价格',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PRICE").focus();
-			return false;
-		}
-		if($("#STARTTIME").val()==""){
-			$("#STARTTIME").tips({
-				side:3,
-	            msg:'请输入开始销售时间',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#STARTTIME").focus();
-			return false;
-		}
-		if($("#ISPUB").val()==""){
-			$("#ISPUB").tips({
-				side:3,
-	            msg:'请输入是否发布',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#ISPUB").focus();
-			return false;
-		}
-		if($("#TOTALNUM").val()==""){
-			$("#TOTALNUM").tips({
-				side:3,
-	            msg:'请输入库存总数',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TOTALNUM").focus();
-			return false;
-		}
-		if($("#TOTALWARN").val()==""){
-			$("#TOTALWARN").tips({
-				side:3,
-	            msg:'请输入库存警告',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TOTALWARN").focus();
-			return false;
-		}
-		if($("#BRAND").val()==""){
-			$("#BRAND").tips({
-				side:3,
-	            msg:'请输入品牌',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#BRAND").focus();
-			return false;
-		}
-		if($("#PROMOTIONPRICE").val()==""){
-			$("#PROMOTIONPRICE").tips({
-				side:3,
-	            msg:'请输入促销价格',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PROMOTIONPRICE").focus();
-			return false;
-		}
-		if($("#PROMOTIONTIME").val()==""){
-			$("#PROMOTIONTIME").tips({
-				side:3,
-	            msg:'请输入促销时间',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#PROMOTIONTIME").focus();
-			return false;
-		}
-		if($("#LIMITNUM").val()==""){
-			$("#LIMITNUM").tips({
-				side:3,
-	            msg:'请输入限购数量',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#LIMITNUM").focus();
-			return false;
-		}
-		if($("#MARKETPRICE").val()==""){
-			$("#MARKETPRICE").tips({
-				side:3,
-	            msg:'请输入市场售价',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#MARKETPRICE").focus();
-			return false;
-		}
-		if($("#FEEDBACKPRICE").val()==""){
-			$("#FEEDBACKPRICE").tips({
-				side:3,
-	            msg:'请输入分成金额',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#FEEDBACKPRICE").focus();
-			return false;
-		}
-		if($("#ISSHOW").val()==""){
-			$("#ISSHOW").tips({
-				side:3,
-	            msg:'请输入是否在店铺显示',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#ISSHOW").focus();
-			return false;
-		}
-		if($("#LABELID").val()==""){
-			$("#LABELID").tips({
-				side:3,
-	            msg:'请输入推荐标签',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#LABELID").focus();
-			return false;
-		}
-		if($("#WEIGHT").val()==""){
-			$("#WEIGHT").tips({
-				side:3,
-	            msg:'请输入商品重量',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#WEIGHT").focus();
-			return false;
-		}
-		if($("#ISSALE").val()==""){
-			$("#ISSALE").tips({
-				side:3,
-	            msg:'请输入是否允许做为普通商品销售，否则只能赠送及配件',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#ISSALE").focus();
-			return false;
-		}
-		if($("#EXPRESSPRICE").val()==""){
-			$("#EXPRESSPRICE").tips({
-				side:3,
-	            msg:'请输入快递费',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#EXPRESSPRICE").focus();
-			return false;
-		}
-		if($("#ISEXPRESS").val()==""){
-			$("#ISEXPRESS").tips({
-				side:3,
-	            msg:'请输入是否免费邮寄',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#ISEXPRESS").focus();
-			return false;
-		}
-		if($("#LASTUPDATE").val()==""){
-			$("#LASTUPDATE").tips({
-				side:3,
-	            msg:'请输入更新时间',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#LASTUPDATE").focus();
-			return false;
-		}
 		$("#Form").submit();
 		$("#zhongxin").hide();
 		$("#zhongxin2").show();
@@ -290,104 +40,30 @@
 </script>
 	</head>
 <body>
-	<form action="goods/${msg}.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
+	<form action="propertyvalue/${msg}.do" name="Form" id="Form" method="post">
 		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
+		<%-- <input type="hidden" name="GOODS_ID" id="GOODS_ID" value="${pd.GOODS_ID}"/> --%>
+		<input type="hidden" name="GOODS_ID" id="GOODS_ID" value="1"/>
 		<div id="zhongxin">
-		<table>
+		<table >
 			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="SID" id="SID" value="${pd.SID}" maxlength="32" placeholder="这里输入商店" title="商店"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入商品名称" title="商品名称"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="TYPE" id="TYPE" value="${pd.TYPE}" maxlength="32" placeholder="这里输入商品主类型" title="商品主类型"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="CODE" id="CODE" value="${pd.CODE}" maxlength="32" placeholder="这里输入商品货号" title="商品货号"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="KEYSWORK" id="KEYSWORK" value="${pd.KEYSWORK}" maxlength="32" placeholder="这里输入商品关键字" title="商品关键字"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="TITLE" id="TITLE" value="${pd.TITLE}" maxlength="32" placeholder="这里输入商品简单描述" title="商品简单描述"/></td>
-			</tr>
-			<tr>
-				<td>商品主图：<input style="width:400px;margin-top:5px;" type="file" name="PICTUREURL" id="PICTUREURL" /></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32" placeholder="这里输入商品原始价格" title="商品原始价格"/></td>
-			</tr>
-			<tr>
-				<td><input  style="width:400px;margin-top:5px;" class="span10 date-picker" name="STARTTIME" id="STARTTIME" value="${pd.STARTTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="开始销售时间" title="开始销售时间"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="ISPUB" id="ISPUB" value="${pd.ISPUB}" maxlength="32" placeholder="这里输入是否发布" title="是否发布"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="TOTALNUM" id="TOTALNUM" value="${pd.TOTALNUM}" maxlength="32" placeholder="这里输入库存总数" title="库存总数"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="TOTALWARN" id="TOTALWARN" value="${pd.TOTALWARN}" maxlength="32" placeholder="这里输入库存警告" title="库存警告"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:100px;margin-top:5px;" type="button" name="BRAND" id="BRAND" value="品牌" maxlength="32"  title="品牌" onclick = "addBrand();"/></td>
-			</tr>
-				<input type = "hidden" id = "BRAND_ID" />	
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="PROMOTIONPRICE" id="PROMOTIONPRICE" value="${pd.PROMOTIONPRICE}" maxlength="32" placeholder="这里输入促销价格" title="促销价格"/></td>
-			</tr>
-			<tr>
-				<td><input  style="width:400px;margin-top:5px;" class="span10 date-picker" name="PROMOTIONTIME" id="PROMOTIONTIME" value="${pd.PROMOTIONTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="促销时间" title="促销时间"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="LIMITNUM" id="LIMITNUM" value="${pd.LIMITNUM}" maxlength="32" placeholder="这里输入限购数量" title="限购数量"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="MARKETPRICE" id="MARKETPRICE" value="${pd.MARKETPRICE}" maxlength="32" placeholder="这里输入市场售价" title="市场售价"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="FEEDBACKPRICE" id="FEEDBACKPRICE" value="${pd.FEEDBACKPRICE}" maxlength="32" placeholder="这里输入分成金额" title="分成金额"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="number" name="ISSHOW" id="ISSHOW" value="${pd.ISSHOW}" maxlength="32" placeholder="这里输入是否在店铺显示" title="是否在店铺显示"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="LABELID" id="LABELID" value="${pd.LABELID}" maxlength="32" placeholder="这里输入推荐标签" title="推荐标签"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="WEIGHT" id="WEIGHT" value="${pd.WEIGHT}" maxlength="32" placeholder="这里输入商品重量" title="商品重量"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="ISSALE" id="ISSALE" value="${pd.ISSALE}" maxlength="32" placeholder="这里输入是否允许做为普通商品销售，否则只能赠送及配件" title="是否允许做为普通商品销售，否则只能赠送及配件"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="EXPRESSPRICE" id="EXPRESSPRICE" value="${pd.EXPRESSPRICE}" maxlength="32" placeholder="这里输入快递费" title="快递费"/></td>
-			</tr>
-			<tr>
-				<td><input style="width:400px;margin-top:5px;" type="text" name="ISEXPRESS" id="ISEXPRESS" value="${pd.ISEXPRESS}" maxlength="32" placeholder="这里输入是否免费邮寄" title="是否免费邮寄"/></td>
-			</tr>
-			<tr>
-                  	<td>图文详情图片地址<input type="file" name="uploadImg" id="uploadImg" onchange="uploadother('DETAILIMAGE');" /></td>
-                   </tr>
-                   <tr>
-                   	<td><input type="text" id = "detailimage" /></td>
-                   </tr>
-			<tr>
-                  <td><textarea name="DESCRIPTION" id="DESCRIPTION" cols="40" rows="40"></textarea></td>
-                  <script>
-	                // Replace the <textarea id="editor1"> with a CKEditor
-	                // instance, using default configuration.
-	                CKEDITOR.replace( 'DESCRIPTION' );
-	            </script>
-             </tr>
-			<tr>
-				<td style="text-align: center;">
-					<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
-					<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
+				<td></td>
+				<td >商品类型：
+				</td>
+				<td>
+					<select  data-placeholder="请选择" style="vertical-align:top;width: 120px;" name = "TYPE_ID"  id="select_type" onchange = "getlist();">
+						
+					</select>
 				</td>
 			</tr>
 		</table>
+		<table id = "list">
+			
+		</table>
+		<div>
+					<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
+					<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
+		</div>
 		</div>
 		
 		<div id="zhongxin2" class="center" style="display:none"><br/><br/><br/><br/><br/><img src="static/images/jiazai.gif" /><br/><h4 class="lighter block green">提交中...</h4></div>
@@ -412,9 +88,71 @@
 			
 			//日期框
 			$('.date-picker').datepicker();
-			
+			getJsonType();
 		});
-		
+		function getJsonType(){
+			var TYPE_ID = $("#TYPE_ID").val();
+			$.ajax({
+                url: '<%=basePath%>goodstype/getJsonType.do',
+                async:false, 
+                dataType : "json",
+                success: function(data) {
+					var html = "<option>请选择</option>";	
+                	if(data.list != null && data.list.length>0){
+                		for(var i=0;i<data.list.length;i++){
+                			if(TYPE_ID != null){
+                				if(TYPE_ID == data.list[i].ID){
+                					html += "<option selected = \"selected\" id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                				}else{
+                					html += "<option id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";			
+                				}
+                			}else{
+                				html += "<option id = \""+ data.list[i].ID +"\" value = \""+ data.list[i].ID +"\">"+ data.list[i].NAME +"</option>";
+                			}
+                		}
+                	}
+                	$("#select_type").html(html);
+                }
+			});
+		}
+		function getlist(){
+			var type_id = $("#select_type").val();
+			$.ajax({
+                url: '<%=basePath%>goodsproperty/getJsonProperty.do?TYPE_ID='+type_id,
+                async:false, 
+                dataType : "json",
+                success: function(data) {
+					var html = "";
+                	if(data.list != null && data.list.length>0){
+                		for(var i = 0; i < data.list.length; i ++){
+                			if(data.list[i].PLANT_STATUS == "0"){
+                				html += "<tr>";
+                        		html += "	<td></td>";
+                        		html += "	<td>"+ data.list[i].NAME +"：</td>";    
+                        		html += "	<td> <input style=\"width:320px;margin-top:5px;\" name=\""+ data.list[i].NAME +","+ data.list[i].PLANT_STATUS +","+ data.list[i].ID +"\" id=\"PROPERTY_NUM\"  maxlength=\"32\" /></td>";
+                        		html += "</tr>";	
+                			}else if(data.list[i].PLANT_STATUS == "1"){
+                				html += "<tr>";
+                        		html += "	<td></td>";
+                        		html += "	<td>"+ data.list[i].NAME +"：</td>";
+                        		html += "	<td>";    
+                        		html += "		<select name=\""+ data.list[i].NAME +","+ data.list[i].PLANT_STATUS +","+ data.list[i].ID +"\" id=\"STATUS\"  data-placeholder=\"请选择\" style=\"vertical-align:top;width: 120px;\">";
+            					var str = data.list[i].VALUE_LIST.split(",");
+                        		for(var j = 0; j < str.length; j ++){
+            						html += "<option value = \""+ str[j] +"\">"+ str[j] +"</option>";
+            					}
+                        		html += "	  	</select>";
+                        		html += "	</td>";
+                        		html += "</tr>";
+                			}else{
+                				
+                			}
+                		}
+                		$("#list").html(html);  					                		
+                	}
+                }
+			});
+		}
 		</script>
 </body>
 </html>
