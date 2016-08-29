@@ -298,87 +298,91 @@
 		<input type="hidden" name="ID" id="ID" value="${pd.ID}"/>
 		<div id="zhongxin">
 		<table>
-			<tr>
+			<tr><td>商店：</td>
 				<td><input style="width:400px;margin-top:5px;" type="number" name="SID" id="SID" value="${pd.SID}" maxlength="32" placeholder="这里输入商店" title="商店"/></td>
 			</tr>
-			<tr>
+			<tr><td>商品名称：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="32" placeholder="这里输入商品名称" title="商品名称"/></td>
 			</tr>
-			<tr>
+			<tr><td>商品类型：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="TYPE" id="TYPE" value="${pd.TYPE}" maxlength="32" placeholder="这里输入商品主类型" title="商品主类型"/></td>
 			</tr>
-			<tr>
+			<tr><td>商品货号：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="CODE" id="CODE" value="${pd.CODE}" maxlength="32" placeholder="这里输入商品货号" title="商品货号"/></td>
 			</tr>
-			<tr>
+			<tr><td>关键字：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="KEYSWORK" id="KEYSWORK" value="${pd.KEYSWORK}" maxlength="32" placeholder="这里输入商品关键字" title="商品关键字"/></td>
 			</tr>
-			<tr>
+			<tr><td>商品描述：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="TITLE" id="TITLE" value="${pd.TITLE}" maxlength="32" placeholder="这里输入商品简单描述" title="商品简单描述"/></td>
 			</tr>
 			<tr>
-				<td>商品主图：<input style="width:400px;margin-top:5px;" type="file" name="PICTUREURL" id="PICTUREURL" /></td>
+				<td>商品主图：</td>
+				<td><input style="width:400px;margin-top:5px;" type="file" name="PICTUREURL" id="PICTUREURL" /></td>
 			</tr>
-			<tr>
+			<tr><td>商品价格：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="32" placeholder="这里输入商品原始价格" title="商品原始价格"/></td>
 			</tr>
-			<tr>
+			<tr><td>开售时间：</td>
 				<td><input  style="width:400px;margin-top:5px;" class="span10 date-picker" name="STARTTIME" id="STARTTIME" value="${pd.STARTTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="开始销售时间" title="开始销售时间"/></td>
 			</tr>
-			<tr>
+			<tr><td>是否发布：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="ISPUB" id="ISPUB" value="${pd.ISPUB}" maxlength="32" placeholder="这里输入是否发布" title="是否发布"/></td>
 			</tr>
-			<tr>
+			<tr><td>库存总数：</td>
 				<td><input style="width:400px;margin-top:5px;" type="number" name="TOTALNUM" id="TOTALNUM" value="${pd.TOTALNUM}" maxlength="32" placeholder="这里输入库存总数" title="库存总数"/></td>
 			</tr>
-			<tr>
+			<tr><td>库存警告：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="TOTALWARN" id="TOTALWARN" value="${pd.TOTALWARN}" maxlength="32" placeholder="这里输入库存警告" title="库存警告"/></td>
 			</tr>
 			<tr>
 				<td><input style="width:100px;margin-top:5px;" type="button" name="BRAND" id="BRAND" value="品牌" maxlength="32"  title="品牌" onclick = "addBrand();"/></td>
 			</tr>
 				<input type = "hidden" id = "BRAND_ID" name = "BRAND_ID"/>	
-			<tr>
+			<tr><td>促销价格：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="PROMOTIONPRICE" id="PROMOTIONPRICE" value="${pd.PROMOTIONPRICE}" maxlength="32" placeholder="这里输入促销价格" title="促销价格"/></td>
 			</tr>
-			<tr>
+			<tr><td>促销时间：</td>
 				<td><input  style="width:400px;margin-top:5px;" class="span10 date-picker" name="PROMOTIONTIME" id="PROMOTIONTIME" value="${pd.PROMOTIONTIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="促销时间" title="促销时间"/></td>
 			</tr>
-			<tr>
+			<tr><td>限购数量：</td>
 				<td><input style="width:400px;margin-top:5px;" type="number" name="LIMITNUM" id="LIMITNUM" value="${pd.LIMITNUM}" maxlength="32" placeholder="这里输入限购数量" title="限购数量"/></td>
 			</tr>
-			<tr>
+			<tr><td>市场售价：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="MARKETPRICE" id="MARKETPRICE" value="${pd.MARKETPRICE}" maxlength="32" placeholder="这里输入市场售价" title="市场售价"/></td>
 			</tr>
-			<tr>
+			<tr><td>分成金额：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="FEEDBACKPRICE" id="FEEDBACKPRICE" value="${pd.FEEDBACKPRICE}" maxlength="32" placeholder="这里输入分成金额" title="分成金额"/></td>
 			</tr>
-			<tr>
+			<tr><td>是否在店铺显示：</td>
 				<td><input style="width:400px;margin-top:5px;" type="number" name="ISSHOW" id="ISSHOW" value="${pd.ISSHOW}" maxlength="32" placeholder="这里输入是否在店铺显示" title="是否在店铺显示"/></td>
 			</tr>
-			<tr>
+			<tr><td>推荐标签：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="LABELID" id="LABELID" value="${pd.LABELID}" maxlength="32" placeholder="这里输入推荐标签" title="推荐标签"/></td>
 			</tr>
-			<tr>
+			<tr><td>商品重量：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="WEIGHT" id="WEIGHT" value="${pd.WEIGHT}" maxlength="32" placeholder="这里输入商品重量" title="商品重量"/></td>
 			</tr>
-			<tr>
+			<tr><td>待定：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="ISSALE" id="ISSALE" value="${pd.ISSALE}" maxlength="32" placeholder="这里输入是否允许做为普通商品销售，否则只能赠送及配件" title="是否允许做为普通商品销售，否则只能赠送及配件"/></td>
 			</tr>
-			<tr>
+			<tr><td>快递费：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="EXPRESSPRICE" id="EXPRESSPRICE" value="${pd.EXPRESSPRICE}" maxlength="32" placeholder="这里输入快递费" title="快递费"/></td>
 			</tr>
-			<tr>
+			<tr><td>是否免费邮寄：</td>
 				<td><input style="width:400px;margin-top:5px;" type="text" name="ISEXPRESS" id="ISEXPRESS" value="${pd.ISEXPRESS}" maxlength="32" placeholder="这里输入是否免费邮寄" title="是否免费邮寄"/></td>
 			</tr>
 			<tr>
-                  	<td>图文详情图片地址<input type="file" name="uploadImg" id="uploadImg" onchange="uploadother('DETAILIMAGE');" /></td>
-                   </tr>
-                   <tr>
-                   	<td><input type="text" id = "detailimage" /></td>
-                   </tr>
+                 <td>图文详情图片地址</td><td>
+                 <input type="file" name="uploadImg" id="uploadImg" onchange="uploadother('DETAILIMAGE');" /></td>
+            </tr>
+            <tr>
+            	<td>图文详情图片地址</td>
+            	<td><input type="text" id = "detailimage" /></td>
+            </tr>
 			<tr>
-                  <td><textarea name="DESCRIPTION" id="DESCRIPTION" cols="40" rows="40"></textarea></td>
+				<td>详情描述：</td>
+                <td><textarea name="DESCRIPTION" id="DESCRIPTION" cols="40" rows="40"></textarea></td>
                   <script>
 	                // Replace the <textarea id="editor1"> with a CKEditor
 	                // instance, using default configuration.
